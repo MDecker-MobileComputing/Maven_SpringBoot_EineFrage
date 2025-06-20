@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  h2-db:
+    image: oscarfonts/h2  # für neueste Version siehe https://hub.docker.com/r/oscarfonts/h2/tags
+    container_name: h2-database
+    ports:
+      - "1521:1521"     # TCP port for H2 TCP server
+      - "9090:81"       # Map host port 9090 to container's web console port 81
+    environment:
+      - H2_OPTIONS=-ifNotExists
+#    volumes:
+#      - h2-data:/opt/h2-data
+    restart: unless-stopped
+
+#volumes:
+#  h2-data:
+#    driver: local
