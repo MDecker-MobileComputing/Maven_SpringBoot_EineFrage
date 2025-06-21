@@ -11,15 +11,15 @@
 
     <ol>
         <!-- Die ersten beiden Fragen sind auf jeden Fall gesetzt -->
-        <li><a href="/sc/antwort/1" th:text="${frage.getAntwort1text()}"></a></li>
-        <li><a href="/sc/antwort/2" th:text="${frage.getAntwort2text()}"></a></li>
+        <li><a th:href="'/sc/' + ${frage.getId()} + '/antwort/1'" th:text="${frage.getAntwort1text()}"></a></li>
+        <li><a th:href="'/sc/' + ${frage.getId()} + '/antwort/2'" th:text="${frage.getAntwort2text()}"></a></li>
 
         <!-- Fragen 3+4 sind optional -->
         <li th:if="${frage.getAntwort3text().length() > 0}">
-            <a href="/sc/antwort/3" th:text="${frage.getAntwort3text()}"></a>
+           <a th:href="'/sc/' + ${frage.getId()} + '/antwort/3'" th:text="${frage.getAntwort3text()}">
         </li>
         <li th:if="${frage.getAntwort4text().length() > 0}">
-            <a href="/sc/antwort/4" th:text="${frage.getAntwort4text()}"></a>
+            <a th:href="'/sc/' + ${frage.getId()} + '/antwort/4'" th:text="${frage.getAntwort4text()}">
         </li>
     </ol>
 

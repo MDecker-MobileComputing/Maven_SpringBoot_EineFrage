@@ -211,6 +211,42 @@ public class SingleChoiceFrageEntity {
         
         this.zeitpunktLetzteAntwort = zeitpunktLetzteAntwort;
     }
+    
+    /**
+     * Nummer der letzten Antwort, die gesetzt ist, bestimmen.
+     * 
+     * @return Nummer der max. Antwort, entweder 2, 3 oder 4
+     *         (die Fragen 1+2 müssen immer gesetzt sein).
+     */
+    public int getMaxAntwortNr() {
+     
+        if ( antwort3text == null || antwort3text.isBlank() ) {
+            
+            return 2;
+        }
+        if ( antwort4text == null || antwort4text.isBlank() ) {
+            
+            return 3;
+        }
+
+        return 4;
+    }
+    
+    public String getAntwortText( int antwortNr ) {
+
+        switch ( antwortNr ) {
+            case 1:
+                return antwort1text;
+            case 2:
+                return antwort2text;
+            case 3:
+                return antwort3text;
+            case 4:
+                return antwort4text;
+            default:
+                throw new IllegalArgumentException( "Ungültige Antwort-Nr: " + antwortNr );
+        }
+    }
 
 }
 

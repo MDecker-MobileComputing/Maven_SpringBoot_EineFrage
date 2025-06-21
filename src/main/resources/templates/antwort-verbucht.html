@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <title>Antwort verbucht</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/umfrage-stil.css"/>
+</head>
+<body>
+
+    <h1>Ihre Antwort wurde verbucht</h1>
+
+    <p>
+        <span class="fett">Frage:</span>
+        <span th:text="${fragetext}"></span>
+    </p>
+
+    <p>
+        <span class="fett">Gewählte Antwort:</span>
+        <span th:text="${antworttext}"></span>
+    </p>
+    <br>
+
+    <p>Sie können dieses Browser-Fenster jetzt schließen.</p>
+
+</body>
+</html>
+
+
