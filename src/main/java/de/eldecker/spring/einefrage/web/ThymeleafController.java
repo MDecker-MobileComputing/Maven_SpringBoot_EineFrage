@@ -21,6 +21,7 @@ import de.eldecker.spring.einefrage.logik.UmfrageException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 /**
  * Controller zur Erzeugung von Web-Seiten mit Template-Engine "Thymeleaf".
  */
@@ -28,6 +29,7 @@ import org.slf4j.LoggerFactory;
 public class ThymeleafController {
 
     private Logger LOG = LoggerFactory.getLogger( ThymeleafController.class );
+
     
     /** Bean für Zugriff auf DB-Tabelle mit Single-Choice-Fragen. */ 
     @Autowired
@@ -113,7 +115,9 @@ public class ThymeleafController {
     
     
     /**
-     * Anzeige der Auswertung zu einer Single-Choice-Frage.
+     * Anzeige der Auswertung zu einer Single-Choice-Frage: Seite zeigt an,
+     * wie viele Stimmen (absolut und in Prozent) jede der Antwortoptionen 
+     * bekommen hat 
      * 
      * @param frageSchluessel ID/Key der Frage
      * 
