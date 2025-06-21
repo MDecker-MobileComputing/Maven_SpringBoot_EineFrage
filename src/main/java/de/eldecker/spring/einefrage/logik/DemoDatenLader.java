@@ -35,14 +35,47 @@ public class DemoDatenLader implements ApplicationRunner {
 			
 			LOG.info( "Datenbank ist leer, lade Demo-Fragen." );
 			
-			SingleChoiceFrageEntity scf1 = new SingleChoiceFrageEntity( "hunger",
-					                                        "Was soll es heute zum Mittagessen geben?", 
-					                                        "Schnitzel", "Sushi", "Schaschlik", "Salamipizza" );					                                        					                                        					                                        			
-			_frageRepo.save( scf1 );
+			erzeugeSC1();
+			erzeugeSC2();
+			erzeugeSC3();
 		}
 		
 		final long anzahlNachher = _frageRepo.count();
 		LOG.info( "Anzahl Fragen in DB: {}", anzahlNachher );		
+	}
+	
+	
+	private void erzeugeSC1() {
+	        
+	    final SingleChoiceFrageEntity scf = 
+                   new SingleChoiceFrageEntity( "hunger",
+                                                "Was soll es heute zum Mittagessen geben?", 
+                                                "Schnitzel", "Sushi", "Schaschlik", "Salamipizza" );
+        _frageRepo.save( scf );
+	}
+	
+	private void erzeugeSC2() {
+	    
+	    final SingleChoiceFrageEntity scf = 
+	            new SingleChoiceFrageEntity( "haustier",
+	                                         "Welches dieser Tiere wäre das schlechteste Haustier?", 
+	                                         "Ein Tintenfisch mit Schluckauf", 
+	                                         "Ein hyperaktives Nutria", 
+	                                         "Ein stotternder Papagei", 
+	                                         "Ein Eichhörnchen mit Koffeinsucht" );
+	    _frageRepo.save( scf );
+	}
+	
+	private void erzeugeSC3() {
+	        
+	    final SingleChoiceFrageEntity scf = 
+	                new SingleChoiceFrageEntity( "db-thema",
+	                                             "Welche Datenbank soll am nächsten Vorlesungstermin behandelt werden?", 
+	                                             "Cassandra", 
+	                                             "Redis", 
+	                                             "MariaDB", 
+	                                             "Hana" );
+	    _frageRepo.save( scf );
 	}
 	
 }

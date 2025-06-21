@@ -14,6 +14,11 @@ import jakarta.persistence.Table;
 /**
  * Diese Klasse definiert eine Tabelle, in der jede Zeile für eine
  * einzelne Single-Choice-Frage steht.
+ * <br><br>
+ * 
+ * Die müssen zumindest die ersten beiden Fragen gesetzt sein;
+ * wenn Frage 4 gesetzt ist, dann muss auch Frage 3 gesetzt sein
+ * (also keine Lücken).
  */
 @Entity
 @Table( name = "SINGLE_CHOICE_FRAGE" )
@@ -25,10 +30,10 @@ public class SingleChoiceFrageEntity {
 
     private String fragetext;
 
-	private String antwort1text;
-    private String antwort2text;
-    private String antwort3text;
-    private String antwort4text;
+	private String antwort1text = "";
+    private String antwort2text = "";
+    private String antwort3text = "";
+    private String antwort4text = "";
 
     private int antwort1zaehler = 0;
     private int antwort2zaehler = 0;

@@ -12,7 +12,8 @@ a {
     margin-bottom: 1em;
 }
 
-ul li {
+ul li,
+ol li {
     margin-bottom: 20px;
 }
 
