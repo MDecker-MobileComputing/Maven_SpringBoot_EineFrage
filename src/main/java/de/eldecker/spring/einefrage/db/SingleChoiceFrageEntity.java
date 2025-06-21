@@ -58,6 +58,7 @@ public class SingleChoiceFrageEntity {
 
 	public SingleChoiceFrageEntity( String id, String frageText,
 	                                String antwort1text, String antwort2text, String antwort3text, String antwort4text ) {
+
 		this.id        = id;
 		this.fragetext = frageText;
 
@@ -139,6 +140,12 @@ public class SingleChoiceFrageEntity {
 
 		return antwort1zaehler;
 	}
+	
+	public double getAntwort1zaehlerProzent() {
+	    
+	    final double prozent = this.antwort1zaehler * 100.0 / getGesamtzahlAntworten();
+	    return nachkommastellenAbschneiden( prozent ); 
+	}
 
 	public void setAntwort1zaehler(int antwort1zaehler) {
 
@@ -149,6 +156,12 @@ public class SingleChoiceFrageEntity {
 	public int getAntwort2zaehler() {
 	    
 		return antwort2zaehler;
+	}
+	
+	public double getAntwort2zaehlerProzent() {
+	        
+        final double prozent = this.antwort2zaehler * 100.0 / getGesamtzahlAntworten();
+        return nachkommastellenAbschneiden( prozent ); 
 	}
 
 	public void setAntwort2zaehler( int antwort2zaehler ) {
@@ -161,7 +174,13 @@ public class SingleChoiceFrageEntity {
 
 		return antwort3zaehler;
 	}
-
+	
+    public double getAntwort3zaehlerProzent() {
+        
+        final double prozent = this.antwort3zaehler * 100.0 / getGesamtzahlAntworten();
+        return nachkommastellenAbschneiden( prozent ); 
+    }
+	
 	public void setAntwort3zaehler( int antwort3zaehler ) {
 
 		this.antwort3zaehler = antwort3zaehler;
@@ -172,7 +191,13 @@ public class SingleChoiceFrageEntity {
 
 		return antwort4zaehler;
 	}
-
+	
+    public double getAntwort4zaehlerProzent() {
+        
+        final double prozent = this.antwort4zaehler * 100.0 / getGesamtzahlAntworten();
+        return nachkommastellenAbschneiden( prozent ); 
+    }
+	
 	public void setAntwort4zaehler( int antwort4zaehler ) {
 	    
 		this.antwort4zaehler = antwort4zaehler;
@@ -269,10 +294,31 @@ public class SingleChoiceFrageEntity {
     }
     
     
+    /**
+     * Methode gibt String-Repräsentation des Objekts zurück.
+     * 
+     * @return String mit ID/Key der Frage
+     */
     @Override
     public String toString() {
         
         return String.format(  "Single-Choice-Frage mit ID/Key \"%s\".", id );
+    }
+    
+    
+    /**
+     * Schneidet von {@code inputZahl} alle Nachkommastellen nach der ersten
+     * Nachkommastelle ab.
+     *  
+     * @param inputZahl Zahl, von der alle Nachkommastellen ab der zweiten
+     *                  abgeschnitten werden sollen
+     * 
+     * @return {@code inputZahl} mit höchstens einer Nachkommastelle
+     */
+    private double nachkommastellenAbschneiden( double inputZahl ) {
+        
+        double gerundet = (int)(inputZahl * 10) / 10.0;
+        return gerundet;
     }
 
 }
