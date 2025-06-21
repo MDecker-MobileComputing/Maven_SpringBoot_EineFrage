@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <title th:text="'SC-Frage: ' + ${frage.getFragetext()}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/umfrage-stil.css"/>
+</head>
+<body>
+
+    <h1 th:text="${frage.getFragetext()}"></h1>
+
+</body>
+</html>
+
+

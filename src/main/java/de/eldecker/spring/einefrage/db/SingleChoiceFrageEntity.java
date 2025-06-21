@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
  * einzelne Single-Choice-Frage steht.
  */
 @Entity
-@Table( name = "UMFRAGE" )
+@Table( name = "SINGLE_CHOICE_FRAGE" )
 public class SingleChoiceFrageEntity {
 
 	/** ID ist ein String, muss deshalb selbst gesetzt werden. */
@@ -42,7 +42,6 @@ public class SingleChoiceFrageEntity {
      * Version für Optimistic Locking; wird automatisch von JPA verwaltet.
      * Annotation {@code Version} aus Paket {@code jakarta.persistence},
      * nicht {@code org.springframework.data.annotation.Version}.
-     * 
      */
 	@Version
 	private Long version;
@@ -77,6 +76,7 @@ public class SingleChoiceFrageEntity {
 		this.id = id; 
 	}	
 
+	
     public String getFragetext() {
 
 		return fragetext;
@@ -93,7 +93,6 @@ public class SingleChoiceFrageEntity {
 		return antwort1text;
 	}
 
-
 	public void setAntwort1text( String antwort1text ) {
 
 		this.antwort1text = antwort1text;
@@ -104,7 +103,6 @@ public class SingleChoiceFrageEntity {
 
 		return antwort2text;
 	}
-
 
 	public void setAntwort2text( String antwort2text ) {
 
@@ -117,7 +115,6 @@ public class SingleChoiceFrageEntity {
 		return antwort3text;
 	}
 
-
 	public void setAntwort3text( String antwort3text ) {
 		this.antwort3text = antwort3text;
 	}
@@ -127,7 +124,6 @@ public class SingleChoiceFrageEntity {
 
 		return antwort4text;
 	}
-
 
 	public void setAntwort4text( String antwort4text ) {
 
@@ -140,7 +136,6 @@ public class SingleChoiceFrageEntity {
 		return antwort1zaehler;
 	}
 
-
 	public void setAntwort1zaehler(int antwort1zaehler) {
 
 		this.antwort1zaehler = antwort1zaehler;
@@ -151,7 +146,6 @@ public class SingleChoiceFrageEntity {
 	    
 		return antwort2zaehler;
 	}
-
 
 	public void setAntwort2zaehler( int antwort2zaehler ) {
 	    
@@ -164,7 +158,6 @@ public class SingleChoiceFrageEntity {
 		return antwort3zaehler;
 	}
 
-
 	public void setAntwort3zaehler( int antwort3zaehler ) {
 
 		this.antwort3zaehler = antwort3zaehler;
@@ -176,7 +169,6 @@ public class SingleChoiceFrageEntity {
 		return antwort4zaehler;
 	}
 
-
 	public void setAntwort4zaehler( int antwort4zaehler ) {
 	    
 		this.antwort4zaehler = antwort4zaehler;
@@ -187,7 +179,6 @@ public class SingleChoiceFrageEntity {
 
 		return version;
 	}
-
 
 	public void setVersion( Long version ) {
 	    
@@ -204,12 +195,14 @@ public class SingleChoiceFrageEntity {
         this.zeitpunktErzeugung = zeitpunktErzeugung;
     }
 
+    
     public LocalDateTime getZeitpunktLetzteAntwort() {
         
         return zeitpunktLetzteAntwort;
     }
 
     public void setZeitpunktLetzteAntwort( LocalDateTime zeitpunktLetzteAntwort ) {
+
         
         this.zeitpunktLetzteAntwort = zeitpunktLetzteAntwort;
     }
