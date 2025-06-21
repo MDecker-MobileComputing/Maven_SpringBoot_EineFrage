@@ -7,6 +7,13 @@ Es wird folgendes Image verwendet:
 
 <br>
 
+* Container erzeugen und starten: `docker-compose up`
+* Container stoppen (aber nicht löschen): `docker-compose stop`
+* Container starten: `docker-compose start`
+* Container stoppen und löschen: `docker-compose down`
+
+<br>
+
 ----
 
 ## Verbindung zu H2 via HTTP und TCP ##
