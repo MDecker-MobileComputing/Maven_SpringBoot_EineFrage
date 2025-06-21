@@ -4,11 +4,10 @@ import static java.time.LocalDateTime.now;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Version;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 
 
 /**
@@ -212,6 +211,18 @@ public class SingleChoiceFrageEntity {
         this.zeitpunktLetzteAntwort = zeitpunktLetzteAntwort;
     }
     
+    
+    /**
+     * Methode gibt Summe der Stimmen für alle Antwortoptionen zurück.
+     * 
+     * @return Gesamtanzahl der Stimmen
+     */
+    public int getGesamtzahlAntworten() {
+    
+        return antwort1zaehler + antwort2zaehler + antwort3zaehler + antwort4zaehler; 
+    }
+    
+    
     /**
      * Nummer der letzten Antwort, die gesetzt ist, bestimmen.
      * 
@@ -232,9 +243,18 @@ public class SingleChoiceFrageEntity {
         return 4;
     }
     
+    
+    /**
+     * Hilfsmethode: Gibt Text von Antwort mit {@code antwortNr} zurück.
+     * 
+     * @param antwortNr Antwort-Nr (1..4)
+     * 
+     * @return Text der Antwortoption
+     */
     public String getAntwortText( int antwortNr ) {
 
         switch ( antwortNr ) {
+        
             case 1:
                 return antwort1text;
             case 2:
@@ -246,6 +266,13 @@ public class SingleChoiceFrageEntity {
             default:
                 throw new IllegalArgumentException( "Ungültige Antwort-Nr: " + antwortNr );
         }
+    }
+    
+    
+    @Override
+    public String toString() {
+        
+        return String.format(  "Single-Choice-Frage mit ID/Key \"%s\".", id );
     }
 
 }

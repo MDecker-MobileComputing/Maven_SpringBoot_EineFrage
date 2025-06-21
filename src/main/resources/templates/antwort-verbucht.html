@@ -11,7 +11,7 @@
 
     <p>
         <span class="fett">Frage:</span>
-        <span th:text="${fragetext}"></span>
+        <span th:text="${frage.getFragetext()}"></span>
     </p>
 
     <p>
@@ -20,7 +20,11 @@
     </p>
     <br>
 
-    <p>Sie können dieses Browser-Fenster jetzt schließen.</p>
+    <p>
+        Sie können dieses Browser-Fenster jetzt schließen oder 
+        <a th:href="'/sc/auswertung/' + ${frage.getId()}">hier</a>
+        den aktuellen Stand der Umfrage sehen.
+    </p>
 
 </body>
 </html>

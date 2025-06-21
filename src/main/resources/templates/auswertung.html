@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <title th:text="'Auswertung für Single-Choice-Frage' + ${frage.getFragetext()}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/umfrage-stil.css"/>
+</head>
+<body>
+
+    <h1 th:text="'Auswertung für Single-Choice-Frage: ' + ${frage.getFragetext()}"></h1>
+
+    <p class="fett">Stimmen für ...</p>
+    <ul>
+    <li>
+        <span class="fett" th:text="'Antwort 1 (' + ${frage.getAntwort1text()} + '):'"></span> 
+        <span th:text="${frage.getAntwort1zaehler()}"></span>
+    </li>
+    <li>
+        <span class="fett" th:text="'Antwort 2 (' + ${frage.getAntwort2text()} + '):'"></span> 
+        <span th:text="${frage.getAntwort2zaehler()}"></span>
+    </li>
+    <li th:if="${frage.getAntwort3text().length() > 0}">
+        <span class="fett" th:text="'Antwort 3 (' + ${frage.getAntwort3text()} + '):'"></span> 
+        <span th:text="${frage.getAntwort3zaehler()}"></span>
+    </li>
+    <li th:if="${frage.getAntwort4text().length() > 0}">
+        <span class="fett" th:text="'Antwort 4 (' + ${frage.getAntwort4text()} + '):'"></span> 
+        <span th:text="${frage.getAntwort4zaehler()}"></span>
+    </li>
+    </ul>
+    <br><br>
+
+    <p>
+        <span class="fett">Gesamtanzahl der Antworten:</span> 
+        <span th:text="${frage.getGesamtzahlAntworten()}"></span>
+    </p>
+    
+</body>
+</html>

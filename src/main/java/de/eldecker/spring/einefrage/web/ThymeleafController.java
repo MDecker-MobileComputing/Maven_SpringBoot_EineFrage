@@ -79,9 +79,11 @@ public class ThymeleafController {
     /**
      * Verbucht eine Antwort auf eine Single-Choice-Frage.
      * 
-     * @param frageSchluessel ID der Frage
+     * @param frageSchluessel ID/Key der Frage
      * 
-     * @param antwortNr 1-basierte Nummer der Antwort
+     * @param antwortNr 1-basierte Nummer der Antwort; man beachte die
+     *                  beiden Annotationen {@code Min} und {@code Max}
+     *                  aus der <i>Jakarta Bean Validation</i>.
      * 
      * @param model Objekt für Platzhalterwertete in Thymeleaf-Template
      * 
@@ -96,8 +98,8 @@ public class ThymeleafController {
             final SingleChoiceFrageEntity frageEntity = 
                     _singleChoiceLogik.verbucheAntwort( frageSchluessel, antwortNr );
 
-            model.addAttribute( "antworttext", frageEntity.getAntwortText( antwortNr ) );
-            model.addAttribute( "fragetext"  , frageEntity.getFragetext() );
+            model.addAttribute( "frage"      , frageEntity );
+            model.addAttribute( "antworttext", frageEntity.getAntwortText( antwortNr ) );            
             
             return "antwort-verbucht";
         }
@@ -109,4 +111,43 @@ public class ThymeleafController {
         }
     }
     
+    
+    /**
+     * Anzeige der Auswertung zu einer Single-Choice-Frage.
+     * 
+     * @param frageSchluessel ID/Key der Frage
+     * 
+     * @param model Objekt für Platzhalterwertete in Thymeleaf-Template
+     * 
+     * @return Template-Datei "auswertung" oder "fehler" 
+     */
+    @GetMapping( "/sc/auswertung/{frageSchluessel}" )    
+    public String auswertungSingleChoiceFrage( @PathVariable String frageSchluessel, 
+                                               Model model ) {
+        
+        final Optional<SingleChoiceFrageEntity> singleChoiceOptional = 
+                                _singleChoiceFrageRepo.findById( frageSchluessel );
+
+        if ( singleChoiceOptional.isPresent() ) {
+        
+            final SingleChoiceFrageEntity singleChoiceFrage = 
+                                                singleChoiceOptional.get();
+        
+            model.addAttribute( "frage", singleChoiceFrage );
+        
+            return "auswertung";
+        
+        } else {
+        
+            final String fehlermeldung = 
+                    format( "Keine Single-Choice-Frage mit ID \"%s\" gefunden.",
+                            frageSchluessel );
+        
+            LOG.warn( fehlermeldung );
+            model.addAttribute( "fehlermeldung", fehlermeldung );
+        
+            return "fehler";
+        }        
+    }
+
 }
