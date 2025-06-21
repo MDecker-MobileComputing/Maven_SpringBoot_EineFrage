@@ -12,15 +12,22 @@ import de.eldecker.spring.einefrage.db.SingleChoiceFrageEntity;
 import de.eldecker.spring.einefrage.db.SingleChoiceFrageRepo;
 
 
+/**
+ * Demo-Daten in DB-Tabelle laden, wenn die Tabelle ganz leer ist.
+ */
 @Component
 public class DemoDatenLader implements ApplicationRunner {
 
 	private static final Logger LOG = LoggerFactory.getLogger( DemoDatenLader.class );
 	
-	
+	/** Repo-Bean für Zugriff auf Tabelle {@code SINGLE_CHOICE_FRAGE}. */
 	@Autowired
 	private SingleChoiceFrageRepo _frageRepo;
 	
+	
+	/**
+	 * Diese Methode wird unmittelbar nach Start der Anwendung ausgeführt.
+	 */
 	@Override
 	public void run( ApplicationArguments args ) throws Exception {
 		
@@ -74,7 +81,7 @@ public class DemoDatenLader implements ApplicationRunner {
 	                                             "Cassandra", 
 	                                             "Redis", 
 	                                             "MariaDB", 
-	                                             "Hana" );
+	                                             "MongoDB" );
 	    _frageRepo.save( scf );
 	}
 	

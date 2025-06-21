@@ -7,8 +7,8 @@ services:
     image: oscarfonts/h2  # für neueste Version siehe https://hub.docker.com/r/oscarfonts/h2/tags
     container_name: h2-database
     ports:
-      - "9092:1521"     # TCP port for H2 TCP server
-      - "9090:81"       # Map host port 9090 to container's web console port 81
+      - "9092:1521"     # Port für JDBC-Verbindung
+      - "9090:81"       # Port für Web-UI "H2 Console"
     environment:
       - H2_OPTIONS=-ifNotExists
 #    volumes:

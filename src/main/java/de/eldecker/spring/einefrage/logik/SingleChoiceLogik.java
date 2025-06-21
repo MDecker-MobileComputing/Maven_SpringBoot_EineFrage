@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 import de.eldecker.spring.einefrage.db.SingleChoiceFrageEntity;
@@ -47,15 +46,17 @@ public class SingleChoiceLogik {
         
         if ( singleChoiceOptional.isEmpty() ) {
             
-            throw new UmfrageException("Keine Single-Choice-Frage mit ID \"" + frageSchluessel + "\" gefunden.");
+            throw new UmfrageException( 
+                    "Keine Single-Choice-Frage mit ID \"" + frageSchluessel + "\" gefunden." );
         }
         
         final SingleChoiceFrageEntity singleChoiceFrage = singleChoiceOptional.get();
         
         if ( antwortNr > singleChoiceFrage.getMaxAntwortNr() ) {
             
-            throw new UmfrageException( "Antwortnummer " + antwortNr + " ist größer als die maximale Antwortnummer "
-                    + singleChoiceFrage.getMaxAntwortNr() + " für ID \"" + frageSchluessel + "\"." );
+            throw new UmfrageException( 
+                    "Antwortnummer " + antwortNr + " ist größer als die maximale Antwortnummer " + 
+                    singleChoiceFrage.getMaxAntwortNr() + " für ID \"" + frageSchluessel + "\"." );
         }
         
         switch ( antwortNr ) {
@@ -73,9 +74,10 @@ public class SingleChoiceLogik {
         _singleChoiceFrageRepo.save( singleChoiceFrage ); // aktualisiert Attribut "Version" automatisch
         // throws OptimisticLockingFailureException
         
-        LOG.info( "Antwort {} auf Single-Choice-Frage mit ID \"{}\" verbucht.", 
-                  antwortNr, frageSchluessel );
+        LOG.info( "Antwort {} auf Single-Choice-Frage mit ID \"{}\" verbucht, Version ist jetzt {}.", 
+                  antwortNr, frageSchluessel, singleChoiceFrage.getVersion() );
         
         return singleChoiceFrage;
     }
+
 }

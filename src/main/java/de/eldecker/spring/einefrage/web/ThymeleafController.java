@@ -21,17 +21,22 @@ import de.eldecker.spring.einefrage.logik.UmfrageException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
+/**
+ * Controller zur Erzeugung von Web-Seiten mit Template-Engine "Thymeleaf".
+ */
 @Controller
 public class ThymeleafController {
 
     private Logger LOG = LoggerFactory.getLogger( ThymeleafController.class );
     
+    /** Bean für Zugriff auf DB-Tabelle mit Single-Choice-Fragen. */ 
     @Autowired
     private SingleChoiceFrageRepo _singleChoiceFrageRepo; 
     
+    /** Bean mit Geschäftslogik für Single-Choice-Fragen. */
     @Autowired 
     private SingleChoiceLogik _singleChoiceLogik;
+    
     
     /**
      * Seite für eine einzelne Single-Choice-Frage anzeigen.
