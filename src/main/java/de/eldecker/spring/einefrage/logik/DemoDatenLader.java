@@ -38,18 +38,17 @@ public class DemoDatenLader implements ApplicationRunner {
 		if ( anzahlVorher > 0 ) {
 			
 			LOG.info( "Datenbank enthält schon Fragen, lade deshalb keine Demo-Fragen." );
-			
-		} else {
-			
-			LOG.info( "Datenbank ist leer, lade Demo-Fragen." );
-			
-			erzeugeSC1();
-			erzeugeSC2();
-			erzeugeSC3();
+			return;			
 		}
+			
+		LOG.info( "Datenbank ist leer, lade Demo-Fragen." );
+			
+		erzeugeSC1();
+		erzeugeSC2();
+		erzeugeSC3();
 		
 		final long anzahlNachher = _frageRepo.count();
-		LOG.info( "Anzahl Fragen in DB: {}", anzahlNachher );		
+		LOG.info( "Anzahl Fragen in DB nach Laden von Demo-Daten: {}", anzahlNachher );		
 	}
 	
 	
