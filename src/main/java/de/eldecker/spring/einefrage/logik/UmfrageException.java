@@ -2,7 +2,7 @@ package de.eldecker.spring.einefrage.logik;
 
 
 /**
- * Eigene Exception-Klasse
+ * Applikations-spezifische Exception-Klasse.
  */
 @SuppressWarnings("serial")
 public class UmfrageException extends Exception {
@@ -16,4 +16,5 @@ public class UmfrageException extends Exception {
         
         super( message );
     }
+
 }

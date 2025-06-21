@@ -63,14 +63,15 @@ public class SingleChoiceLogik {
             }
             catch ( ObjectOptimisticLockingFailureException ex ) { // sollte nur selten passieren
                 
-                LOG.warn( "Versuch {} von {} wegen optimistischer Sperre fehlgeschlagen für Frage-ID \"{}\".",
-                          i, MAX_ANZAHL_VERSUCHE, frageSchluessel );
+                LOG.warn( "Versuch {} von {} von Verbuchung von Antwort {} für Frage \"{}\" fehlgeschlagen.",
+                          i, MAX_ANZAHL_VERSUCHE, antwortNr, frageSchluessel );
             }
-        }
+            
+        } // for
 
         final String fehlertext = 
-                format( "Konnte Antwort für Frage-ID \"%s\" nach %d Versuchen nicht verbuchen.", 
-                        frageSchluessel, MAX_ANZAHL_VERSUCHE ); 
+                format( "Konnte Antwort %d für Frage-ID \"%s\" nach %d Versuchen nicht verbuchen.", 
+                        antwortNr, frageSchluessel, MAX_ANZAHL_VERSUCHE ); 
         
         LOG.error( fehlertext );                               
         throw new UmfrageException( fehlertext ); 
