@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import de.eldecker.spring.einefrage.db.SingleChoiceFrageEntity;
 import de.eldecker.spring.einefrage.db.SingleChoiceFrageRepo;
+import de.eldecker.spring.einefrage.logik.SingleChoiceLogik;
+import de.eldecker.spring.einefrage.logik.UmfrageException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +30,18 @@ public class ThymeleafController {
     @Autowired
     private SingleChoiceFrageRepo _singleChoiceFrageRepo; 
     
+    @Autowired 
+    private SingleChoiceLogik _singleChoiceLogik;
     
+    /**
+     * Seite für eine einzelne Single-Choice-Frage anzeigen.
+     * 
+     * @param frageSchluessel ID/Key der Frage
+     * 
+     * @param model Objekt für Platzhalterwertete in Thymeleaf-Template
+     * 
+     * @return Template-Datei "sc-frage" oder "fehler" 
+     */
     @GetMapping( "/sc/{frageSchluessel}" )
     public String getSingleChoiceFrage( @PathVariable String frageSchluessel, 
                                         Model model ) {
@@ -51,7 +64,6 @@ public class ThymeleafController {
                             frageSchluessel );
             
             LOG.warn( fehlermeldung );
-            
             model.addAttribute( "fehlermeldung", fehlermeldung );
             
             return "fehler";
@@ -74,42 +86,22 @@ public class ThymeleafController {
     public String verbucheSingleChoiceAntwort( @PathVariable String frageSchluessel, 
                                                @PathVariable @Min(1) @Max(4) int antwortNr,
                                                Model model ) {
-        
-        final Optional<SingleChoiceFrageEntity> singleChoiceOptional = 
-                            _singleChoiceFrageRepo.findById( frageSchluessel );
-        
-        if ( singleChoiceOptional.isEmpty() ) {
+        try {
             
-            final String fehlermeldung = 
-                    format( "Frage mit ID \"%s\" nicht gefunden, kann Antwort nicht verbuchen.",
-                            frageSchluessel );
+            final SingleChoiceFrageEntity frageEntity = 
+                    _singleChoiceLogik.verbucheAntwort( frageSchluessel, antwortNr );
+
+            model.addAttribute( "antworttext", frageEntity.getAntwortText( antwortNr ) );
+            model.addAttribute( "fragetext"  , frageEntity.getFragetext() );
             
-            LOG.warn( fehlermeldung );
-            model.addAttribute( "fehlermeldung", fehlermeldung );
+            return "antwort-verbucht";
+        }
+        catch ( UmfrageException ex ) {
             
+            LOG.error( "Fehler beim Verbuchen der Antwort: {}", ex.getMessage() );
+            model.addAttribute( "fehlermeldung", ex.getMessage() );
             return "fehler";
         }
-        
-        final SingleChoiceFrageEntity singleChoiceFrage = singleChoiceOptional.get();
-        
-        if ( antwortNr > singleChoiceFrage.getMaxAntwortNr() ) {
-         
-            final String fehlermeldung = 
-                    format( "Antwort-Nr %d ist für Frage ID \"%s\" nicht erlaubt.",
-                            antwortNr, frageSchluessel );
-            
-            LOG.warn( fehlermeldung );
-            model.addAttribute( "fehlermeldung", fehlermeldung );
-            
-            return "fehler";
-        }
-        
-        // TODO: Antwort verbuchen
-        
-        model.addAttribute( "antworttext", singleChoiceFrage.getAntwortText( antwortNr ) );
-        model.addAttribute( "fragetext"  , singleChoiceFrage.getFragetext() );
-        
-        return "antwort-verbucht";
     }
     
 }
