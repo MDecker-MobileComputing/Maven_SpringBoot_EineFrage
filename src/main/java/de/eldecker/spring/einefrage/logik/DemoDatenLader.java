@@ -20,6 +20,7 @@ public class DemoDatenLader implements ApplicationRunner {
 
 	private static final Logger LOG = LoggerFactory.getLogger( DemoDatenLader.class );
 	
+	
 	/** Repo-Bean für Zugriff auf Tabelle {@code SINGLE_CHOICE_FRAGE}. */
 	@Autowired
 	private SingleChoiceFrageRepo _frageRepo;
@@ -52,6 +53,9 @@ public class DemoDatenLader implements ApplicationRunner {
 	}
 	
 	
+	/**
+	 * Erzeugt Single-Choice-Frage: "Was soll es heute zum Mittagessen geben?"
+	 */
 	private void erzeugeSC1() {
 	        
 	    final SingleChoiceFrageEntity scf = 
@@ -60,7 +64,11 @@ public class DemoDatenLader implements ApplicationRunner {
                                                 "Schnitzel", "Sushi", "Schaschlik", "Salamipizza" );
         _frageRepo.save( scf );
 	}
+
 	
+	/**
+     * Erzeugt Single-Choice-Frage: "Welches dieser Tiere wäre das schlechteste Haustier?"
+     */
 	private void erzeugeSC2() {
 	    
 	    final SingleChoiceFrageEntity scf = 
@@ -72,7 +80,11 @@ public class DemoDatenLader implements ApplicationRunner {
 	                                         "Ein Eichhörnchen mit Koffeinsucht" );
 	    _frageRepo.save( scf );
 	}
+
 	
+    /**
+     * Erzeugt Single-Choice-Frage: "Welche Datenbank soll am nächsten Vorlesungstermin behandelt werden?"
+     */	
 	private void erzeugeSC3() {
 	        
 	    final SingleChoiceFrageEntity scf = 
