@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 import de.eldecker.spring.einefrage.db.SingleChoiceFrageEntity;
@@ -69,10 +70,20 @@ public class SingleChoiceLogik {
                 "Illegale Antwortnummer " + antwortNr + " für ID \"" + frageSchluessel + "\".");
         }
         
+                
         singleChoiceFrage.setZeitpunktLetzteAntwort( now() );
         
-        _singleChoiceFrageRepo.save( singleChoiceFrage ); // aktualisiert Attribut "Version" automatisch
-        // throws OptimisticLockingFailureException
+        
+        try {
+            
+            _singleChoiceFrageRepo.save( singleChoiceFrage ); // aktualisiert Attribut "Version" automatisch
+        }        
+        catch ( ObjectOptimisticLockingFailureException ex ) {
+            
+            LOG.error( "Datensatz wurde in der Zwischenzeit von einem anderen Prozess geaendert: {}", 
+                       ex.getMessage() );                     
+        }
+
         
         LOG.info( "Antwort {} auf Single-Choice-Frage mit ID \"{}\" verbucht, Version ist jetzt {}.", 
                   antwortNr, frageSchluessel, singleChoiceFrage.getVersion() );
