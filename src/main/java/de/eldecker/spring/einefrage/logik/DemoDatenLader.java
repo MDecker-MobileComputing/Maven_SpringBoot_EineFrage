@@ -8,7 +8,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import de.eldecker.spring.einefrage.db.SingleChoiceFrage;
+import de.eldecker.spring.einefrage.db.SingleChoiceFrageEntity;
 import de.eldecker.spring.einefrage.db.SingleChoiceFrageRepo;
 
 
@@ -35,7 +35,7 @@ public class DemoDatenLader implements ApplicationRunner {
 			
 			LOG.info( "Datenbank ist leer, lade Demo-Fragen." );
 			
-			SingleChoiceFrage scf1 = new SingleChoiceFrage( "hunger",
+			SingleChoiceFrageEntity scf1 = new SingleChoiceFrageEntity( "hunger",
 					                                        "Was soll es heute zum Mittagessen geben?", 
 					                                        "Schnitzel", "Sushi", "Schaschlik", "Salamipizza" );					                                        					                                        					                                        			
 			_frageRepo.save( scf1 );

@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface SingleChoiceFrageRepo extends JpaRepository<SingleChoiceFrage, Long> {
+public interface SingleChoiceFrageRepo extends JpaRepository<SingleChoiceFrageEntity, Long> {
 
 }

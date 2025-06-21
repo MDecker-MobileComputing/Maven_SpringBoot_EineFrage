@@ -10,9 +10,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+
+/**
+ * Diese Klasse definiert eine Tabelle, in der jede Zeile für eine
+ * einzelne Single-Choice-Frage steht.
+ */
 @Entity
 @Table( name = "UMFRAGE" )
-public class SingleChoiceFrage {
+public class SingleChoiceFrageEntity {
 
 	/** ID ist ein String, muss deshalb selbst gesetzt werden. */
     @Id
@@ -37,6 +42,7 @@ public class SingleChoiceFrage {
      * Version für Optimistic Locking; wird automatisch von JPA verwaltet.
      * Annotation {@code Version} aus Paket {@code jakarta.persistence},
      * nicht {@code org.springframework.data.annotation.Version}.
+     * 
      */
 	@Version
 	private Long version;
@@ -45,11 +51,10 @@ public class SingleChoiceFrage {
 	/**
 	 * Default-Konstruktor, obligatorisch für <i>Spring Data JPA</i>
 	 */
-	public SingleChoiceFrage() {}
+	public SingleChoiceFrageEntity() {}
 
-	public SingleChoiceFrage( String id, String frageText,
-	                          String antwort1text, String antwort2text, String antwort3text, String antwort4text ) {
-
+	public SingleChoiceFrageEntity( String id, String frageText,
+	                                String antwort1text, String antwort2text, String antwort3text, String antwort4text ) {
 		this.id        = id;
 		this.fragetext = frageText;
 
@@ -209,7 +214,5 @@ public class SingleChoiceFrage {
         this.zeitpunktLetzteAntwort = zeitpunktLetzteAntwort;
     }
 
-	
-	
 }
 
