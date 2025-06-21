@@ -10,9 +10,7 @@ import jakarta.persistence.Table;
 @Table( name = "UMFRAGE" )
 public class SingleChoiceFrage {
 
-	/**
-	 * ID ist ein String, muss deshalb selbst gesetzt werden.
-	 */
+	/** ID ist ein String, muss deshalb selbst gesetzt werden. */
     @Id
     private String id;
 
@@ -131,11 +129,13 @@ public class SingleChoiceFrage {
 
 
 	public int getAntwort2zaehler() {
+	    
 		return antwort2zaehler;
 	}
 
 
 	public void setAntwort2zaehler( int antwort2zaehler ) {
+	    
 		this.antwort2zaehler = antwort2zaehler;
 	}
 
@@ -159,6 +159,7 @@ public class SingleChoiceFrage {
 
 
 	public void setAntwort4zaehler( int antwort4zaehler ) {
+	    
 		this.antwort4zaehler = antwort4zaehler;
 	}
 
@@ -170,6 +171,7 @@ public class SingleChoiceFrage {
 
 
 	public void setVersion( Long version ) {
+	    
 		this.version = version;
 	}
 

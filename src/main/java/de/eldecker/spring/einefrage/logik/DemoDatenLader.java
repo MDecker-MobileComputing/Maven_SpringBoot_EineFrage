@@ -17,6 +17,7 @@ public class DemoDatenLader implements ApplicationRunner {
 
 	private static final Logger LOG = LoggerFactory.getLogger( DemoDatenLader.class );
 	
+	
 	@Autowired
 	private SingleChoiceFrageRepo _frageRepo;
 	
