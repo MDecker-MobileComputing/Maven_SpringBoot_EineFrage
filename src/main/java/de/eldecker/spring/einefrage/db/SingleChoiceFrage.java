@@ -1,6 +1,10 @@
 package de.eldecker.spring.einefrage.db;
 
-import org.springframework.data.annotation.Version;
+import static java.time.LocalDateTime.now;
+
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Version;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -25,7 +29,15 @@ public class SingleChoiceFrage {
     private int antwort2zaehler = 0;
     private int antwort3zaehler = 0;
     private int antwort4zaehler = 0;
-
+    
+    private LocalDateTime zeitpunktErzeugung;
+    private LocalDateTime zeitpunktLetzteAntwort;
+    
+    /**
+     * Version für Optimistic Locking; wird automatisch von JPA verwaltet.
+     * Annotation {@code Version} aus Paket {@code jakarta.persistence},
+     * nicht {@code org.springframework.data.annotation.Version}.
+     */
 	@Version
 	private Long version;
 
@@ -45,6 +57,8 @@ public class SingleChoiceFrage {
 		this.antwort2text = antwort2text;
 		this.antwort3text = antwort3text;
 		this.antwort4text = antwort4text;
+		
+		zeitpunktErzeugung = now();
 	}
 
 
@@ -175,5 +189,27 @@ public class SingleChoiceFrage {
 		this.version = version;
 	}
 
+    public LocalDateTime getZeitpunktErzeugung() {
+        
+        return zeitpunktErzeugung;
+    }
+
+    public void setZeitpunktErzeugung( LocalDateTime zeitpunktErzeugung ) {
+        
+        this.zeitpunktErzeugung = zeitpunktErzeugung;
+    }
+
+    public LocalDateTime getZeitpunktLetzteAntwort() {
+        
+        return zeitpunktLetzteAntwort;
+    }
+
+    public void setZeitpunktLetzteAntwort( LocalDateTime zeitpunktLetzteAntwort ) {
+        
+        this.zeitpunktLetzteAntwort = zeitpunktLetzteAntwort;
+    }
+
+	
+	
 }
 
