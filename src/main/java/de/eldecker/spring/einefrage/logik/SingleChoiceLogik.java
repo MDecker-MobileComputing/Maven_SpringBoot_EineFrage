@@ -1,5 +1,6 @@
 package de.eldecker.spring.einefrage.logik;
 
+import static java.lang.String.format;
 import static java.time.LocalDateTime.now;
 
 import java.util.Optional;
@@ -22,6 +23,10 @@ public class SingleChoiceLogik {
     
     private Logger LOG = LoggerFactory.getLogger( SingleChoiceLogik.class );
     
+    
+    /** Max. Anzahl der Versuche für Speichern eines geänderten Datensatzes. */
+    private static final int MAX_ANZAHL_VERSUCHE = 3;
+    
 
     /** Repo-Bean für Zugriff auf Datenbanktabelle {@code SINGLE_CHOICE_FRAGE}. */
     @Autowired
@@ -30,6 +35,7 @@ public class SingleChoiceLogik {
     
     /**
      * Einzelne Antwort für eine Single-Choice-Frage verbuchen.
+     * Implementiert einen Retry-Mechanismus für den Fall von konkurrierenden Zugriffen.
      * 
      * @param frageSchluessel ID/Key der Single-Choice-Frage, für die eine Antwort verbucht werden soll
      * 
@@ -37,58 +43,87 @@ public class SingleChoiceLogik {
      * 
      * @return Frage-Objekt mit aktualisierten Zählern für die Antworten und dem Zeitpunkt der letzten Antwort
      * 
-     * @throws UmfrageException Frage nicht gefunden oder unzulässige Antwortnummer angegeben
+     * @throws UmfrageException Frage nicht gefunden, unzulässige Antwortnummer oder nach mehreren
+     *                          Versuchen immer noch konkurrierender Zugriff.
      */
     public SingleChoiceFrageEntity verbucheAntwort( String frageSchluessel, 
                                                     int antwortNr ) throws UmfrageException {
     
+        for ( int i = 1; i <= MAX_ANZAHL_VERSUCHE; i++ ) {
+            
+            try {
+                
+                final SingleChoiceFrageEntity entity = 
+                        versucheAntwortZuVerbuchen( frageSchluessel, antwortNr );
+                
+                LOG.info( "Antwort {} auf Single-Choice-Frage mit ID \"{}\" verbucht, Version ist jetzt {}.", 
+                          antwortNr, frageSchluessel, entity.getVersion() );
+                          
+                return entity;                 
+            }
+            catch ( ObjectOptimisticLockingFailureException ex ) { // sollte nur selten passieren
+                
+                LOG.warn( "Versuch {} von {} wegen optimistischer Sperre fehlgeschlagen für Frage-ID \"{}\".",
+                          i, MAX_ANZAHL_VERSUCHE, frageSchluessel );
+            }
+        }
+
+        final String fehlertext = 
+                format( "Konnte Antwort für Frage-ID \"%s\" nach %d Versuchen nicht verbuchen.", 
+                        frageSchluessel, MAX_ANZAHL_VERSUCHE ); 
+        
+        LOG.error( fehlertext );                               
+        throw new UmfrageException( fehlertext ); 
+    }
+
+
+    /**
+     * Führt einen einzelnen Versuch durch, eine Antwort zu verbuchen. Diese Methode wird
+     * in einer eigenen Transaktion ausgeführt. Wenn ein {@code ObjectOptimisticLockingFailureException}
+     * auftritt, wird die Transaktion zurückgerollt und die aufrufende Methode kann einen neuen
+     * Versuch durchführen.
+     *
+     * @param frageSchluessel ID/Key der Frage, für die eine Antwort verbucht werden soll
+     * 
+     * @param antwortNr Nummer der Antwort, für die der Zähler um {@code +1} erhöht werden soll
+     * 
+     * @return Die gespeicherte Entität bei Erfolg
+     * 
+     * @throws UmfrageException bei Geschäftslogikfehlern (z.B. Frage nicht gefunden)
+     * 
+     * @throws ObjectOptimisticLockingFailureException wenn die Entität mittlerweile von einem anderen Prozess geändert wurde
+     */
+    private SingleChoiceFrageEntity versucheAntwortZuVerbuchen( String frageSchluessel, int antwortNr ) 
+            throws UmfrageException, ObjectOptimisticLockingFailureException  {
+
         final Optional<SingleChoiceFrageEntity> singleChoiceOptional = 
-                                _singleChoiceFrageRepo.findById( frageSchluessel );
+                                    _singleChoiceFrageRepo.findById( frageSchluessel );
         
         if ( singleChoiceOptional.isEmpty() ) {
             
-            throw new UmfrageException( 
-                    "Keine Single-Choice-Frage mit ID \"" + frageSchluessel + "\" gefunden." );
+            throw new UmfrageException( "Keine Single-Choice-Frage mit ID \"" + frageSchluessel + "\" gefunden." );
         }
         
         final SingleChoiceFrageEntity singleChoiceFrage = singleChoiceOptional.get();
         
         if ( antwortNr > singleChoiceFrage.getMaxAntwortNr() ) {
             
-            throw new UmfrageException( 
-                    "Antwortnummer " + antwortNr + " ist größer als die maximale Antwortnummer " + 
-                    singleChoiceFrage.getMaxAntwortNr() + " für ID \"" + frageSchluessel + "\"." );
+            throw new UmfrageException( "Antwortnummer " + antwortNr + " ist größer als die maximale Antwortnummer " + 
+                                        singleChoiceFrage.getMaxAntwortNr() + " für ID \"" + frageSchluessel + "\"." );
         }
         
         switch ( antwortNr ) {
-        
+
             case 1 -> singleChoiceFrage.setAntwort1zaehler( singleChoiceFrage.getAntwort1zaehler() + 1 );
             case 2 -> singleChoiceFrage.setAntwort2zaehler( singleChoiceFrage.getAntwort2zaehler() + 1 );
             case 3 -> singleChoiceFrage.setAntwort3zaehler( singleChoiceFrage.getAntwort3zaehler() + 1 );
             case 4 -> singleChoiceFrage.setAntwort4zaehler( singleChoiceFrage.getAntwort4zaehler() + 1 );
-            default -> throw new UmfrageException(
-                "Illegale Antwortnummer " + antwortNr + " für ID \"" + frageSchluessel + "\".");
+            default -> throw new UmfrageException( "Illegale Antwortnummer " + antwortNr + " für ID \"" + frageSchluessel + "\"." );
         }
         
-                
         singleChoiceFrage.setZeitpunktLetzteAntwort( now() );
         
-        
-        try {
-            
-            _singleChoiceFrageRepo.save( singleChoiceFrage ); // aktualisiert Attribut "Version" automatisch
-        }        
-        catch ( ObjectOptimisticLockingFailureException ex ) {
-            
-            LOG.error( "Datensatz wurde in der Zwischenzeit von einem anderen Prozess geaendert: {}", 
-                       ex.getMessage() );                     
-        }
-
-        
-        LOG.info( "Antwort {} auf Single-Choice-Frage mit ID \"{}\" verbucht, Version ist jetzt {}.", 
-                  antwortNr, frageSchluessel, singleChoiceFrage.getVersion() );
-        
-        return singleChoiceFrage;
+        return _singleChoiceFrageRepo.save( singleChoiceFrage ); // throws ObjectOptimisticLockingFailureException
     }
 
 }
