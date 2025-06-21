@@ -7,10 +7,6 @@ Es wird folgendes Image verwendet:
 
 <br>
 
-jdbc:h2:tcp://localhost:1521/umfrage
-
-<br>
-
 ----
 
 ## Verbindung zu H2 via HTTP und TCP ##
