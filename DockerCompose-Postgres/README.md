@@ -21,7 +21,7 @@ In *pgAdmin* muss manuell die Verbindung zur Postgres-Datenbank konfiguriert wer
 
 <br>
 
-* Anwendung mit Startskripten `maven_start1_postgres.bat` und `maven_start2_postgres.bat` ausführen.
+* Anwendung mit Startskripten `maven_start1_postgres.bat` (Port `8080`) und `maven_start2_postgres.bat` (Port `8081`) ausführen.
 
 * In Eclipse über Run/Debug-Konfiguration: `-Dspring.profiles.active=postgres` unter "Arguments | VM arguments" eintragen, siehe auch Screenshot unten.
 

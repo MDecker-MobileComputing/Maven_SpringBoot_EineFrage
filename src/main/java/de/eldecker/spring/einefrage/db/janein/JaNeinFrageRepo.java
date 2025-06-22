@@ -21,7 +21,7 @@ public interface JaNeinFrageRepo extends JpaRepository<JaNeinFrageEntity, String
 
     
     /**
-     * Holt eine Ja/Nein-Frage mit Zeilensperre für <i>pessimistic Locking</i>.
+     * Holt eine Ja/Nein-Frage mit Zeilensperre für <i>Pessimistic Locking</i>.
      * Timeout für Warten auf Zeilensperre: 5 Sekunden
      * 
      * @param id Key/ID der zu sperrenden Ja/Nein-Frage
@@ -33,10 +33,10 @@ public interface JaNeinFrageRepo extends JpaRepository<JaNeinFrageEntity, String
      *         dann wird eine {@code PessimisticLockException} geworfen.
      * 
      * @throws jakarta.persistence.PessimisticLockException
-     *             wenn die Zeilensperre nicht innerhalb des Timeouts erhalten werden
+     *         wenn die Zeilensperre nicht innerhalb des Timeouts erhalten werden
      */
     @Lock( PESSIMISTIC_WRITE )
-    @QueryHints({ @QueryHint( name = "javax.persistence.lock.timeout", value = "5000") }) 
+    @QueryHints({ @QueryHint( name = "jakarta.persistence.lock.timeout", value = "5000") }) 
     Optional<JaNeinFrageEntity> findWithLockingById( String id );
 
 }
