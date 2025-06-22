@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
-import de.eldecker.spring.einefrage.db.SingleChoiceFrageEntity;
-import de.eldecker.spring.einefrage.db.SingleChoiceFrageRepo;
+import de.eldecker.spring.einefrage.db.singlechoice.SingleChoiceFrageEntity;
+import de.eldecker.spring.einefrage.db.singlechoice.SingleChoiceFrageRepo;
 
 
 /**

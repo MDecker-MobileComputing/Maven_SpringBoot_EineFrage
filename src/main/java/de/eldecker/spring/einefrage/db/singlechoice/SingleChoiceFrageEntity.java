@@ -1,4 +1,4 @@
-package de.eldecker.spring.einefrage.db;
+package de.eldecker.spring.einefrage.db.singlechoice;
 
 import static java.time.LocalDateTime.now;
 
@@ -56,6 +56,9 @@ public class SingleChoiceFrageEntity {
 	 */
 	public SingleChoiceFrageEntity() {}
 
+	/**
+	 * Konstruktor um alle Attribute zu setzen.
+	 */
 	public SingleChoiceFrageEntity( String id, String frageText,
 	                                String antwort1text, String antwort2text, String antwort3text, String antwort4text ) {
 

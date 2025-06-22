@@ -8,17 +8,17 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import de.eldecker.spring.einefrage.db.SingleChoiceFrageEntity;
-import de.eldecker.spring.einefrage.db.SingleChoiceFrageRepo;
+import de.eldecker.spring.einefrage.db.singlechoice.SingleChoiceFrageEntity;
+import de.eldecker.spring.einefrage.db.singlechoice.SingleChoiceFrageRepo;
 
 
 /**
- * Demo-Daten in DB-Tabelle laden, wenn die Tabelle ganz leer ist.
+ * Single-Choice-Fragen in DB-Tabelle laden, wenn die Tabelle ganz leer ist.
  */
 @Component
-public class DemoDatenLader implements ApplicationRunner {
+public class SingleChoiceFragenLader implements ApplicationRunner {
 
-	private static final Logger LOG = LoggerFactory.getLogger( DemoDatenLader.class );
+	private static final Logger LOG = LoggerFactory.getLogger( SingleChoiceFragenLader.class );
 	
 	
 	/** Repo-Bean für Zugriff auf Tabelle {@code SINGLE_CHOICE_FRAGE}. */
@@ -37,18 +37,18 @@ public class DemoDatenLader implements ApplicationRunner {
 		
 		if ( anzahlVorher > 0 ) {
 			
-			LOG.info( "Datenbank enthält schon Fragen, lade deshalb keine Demo-Fragen." );
+			LOG.info( "Datenbank enthält schon SingleChoice-Fragen, lade deshalb keine Demo-Fragen." );
 			return;			
 		}
 			
-		LOG.info( "Datenbank ist leer, lade Demo-Fragen." );
+		LOG.info( "Datenbank ist leer, lade SingleChoice-Fragen." );
 			
 		erzeugeSC1();
 		erzeugeSC2();
 		erzeugeSC3();
 		
 		final long anzahlNachher = _frageRepo.count();
-		LOG.info( "Anzahl Fragen in DB nach Laden von Demo-Daten: {}", anzahlNachher );		
+		LOG.info( "Anzahl SingleChoice-Fragen in DB nach Laden von Demo-Daten: {}", anzahlNachher );		
 	}
 	
 	

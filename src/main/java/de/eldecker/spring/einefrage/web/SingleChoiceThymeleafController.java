@@ -13,8 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import de.eldecker.spring.einefrage.db.SingleChoiceFrageEntity;
-import de.eldecker.spring.einefrage.db.SingleChoiceFrageRepo;
+import de.eldecker.spring.einefrage.db.singlechoice.SingleChoiceFrageEntity;
+import de.eldecker.spring.einefrage.db.singlechoice.SingleChoiceFrageRepo;
 import de.eldecker.spring.einefrage.logik.SingleChoiceLogik;
 import de.eldecker.spring.einefrage.logik.UmfrageException;
 
