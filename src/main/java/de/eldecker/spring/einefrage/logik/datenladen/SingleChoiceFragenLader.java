@@ -1,4 +1,4 @@
-package de.eldecker.spring.einefrage.logik;
+package de.eldecker.spring.einefrage.logik.datenladen;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

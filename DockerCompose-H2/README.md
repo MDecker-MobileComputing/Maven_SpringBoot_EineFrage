@@ -1,3 +1,5 @@
+# H2-Datenbankinstanz in Docker-Container #
+
 <br>
 
 Die Datei [docker-compose.yml](docker-compose.yml) in diesem Verzeichnis erzeugt einen Container mit der Datenbank H2. 
@@ -7,10 +9,10 @@ Es wird folgendes Image verwendet:
 
 <br>
 
-* Container erzeugen und starten: `docker-compose up`
+* Container erzeugen und starten        : `docker-compose up`
 * Container stoppen (aber nicht löschen): `docker-compose stop`
-* Container starten: `docker-compose start`
-* Container stoppen und löschen: `docker-compose down`
+* Container starten                     : `docker-compose start`
+* Container stoppen und löschen         : `docker-compose down`
 
 <br>
 

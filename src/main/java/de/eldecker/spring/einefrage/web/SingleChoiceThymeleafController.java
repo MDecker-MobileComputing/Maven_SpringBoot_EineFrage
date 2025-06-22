@@ -90,7 +90,7 @@ public class SingleChoiceThymeleafController {
      * 
      * @param model Objekt für Platzhalterwertete in Thymeleaf-Template
      * 
-     * @return Template-Datei "antwort-verbucht" oder "fehler" 
+     * @return Template-Datei "sc-antwort-verbucht" oder "fehler" 
      */
     @GetMapping( "/sc/{frageSchluessel}/antwort/{antwortNr}" )
     public String verbucheSingleChoiceAntwort( @PathVariable String frageSchluessel, 
@@ -104,7 +104,7 @@ public class SingleChoiceThymeleafController {
             model.addAttribute( "frage"      , frageEntity );
             model.addAttribute( "antworttext", frageEntity.getAntwortText( antwortNr ) );            
             
-            return "antwort-verbucht";
+            return "sc-antwort-verbucht";
         }
         catch ( UmfrageException ex ) {
             
@@ -124,7 +124,7 @@ public class SingleChoiceThymeleafController {
      * 
      * @param model Objekt für Platzhalterwertete in Thymeleaf-Template
      * 
-     * @return Template-Datei "auswertung" oder "fehler" 
+     * @return Template-Datei "sc-auswertung" oder "fehler" 
      */
     @GetMapping( "/sc/auswertung/{frageSchluessel}" )    
     public String auswertungSingleChoiceFrage( @PathVariable String frageSchluessel, 
@@ -140,7 +140,7 @@ public class SingleChoiceThymeleafController {
         
             model.addAttribute( "frage", singleChoiceFrage );
         
-            return "auswertung";
+            return "sc-auswertung";
         
         } else {
         

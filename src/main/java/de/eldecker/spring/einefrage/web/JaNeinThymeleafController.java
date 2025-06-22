@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import de.eldecker.spring.einefrage.db.janein.JaNeinFrageEntity;
 import de.eldecker.spring.einefrage.db.janein.JaNeinFrageRepo;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 
 /**
@@ -40,8 +42,8 @@ public class JaNeinThymeleafController {
      * @return Template-Datei "jn-frage" oder "fehler" 
      */
     @GetMapping( "/jn/{frageSchluessel}" )
-    public String getSingleChoiceFrage( @PathVariable String frageSchluessel, 
-                                        Model model ) {
+    public String getJaNeinFrage( @PathVariable String frageSchluessel, 
+                                  Model model ) {
         
         final Optional<JaNeinFrageEntity> jaNeinFrageOptional = 
                                 _jaNeinFrageRepo.findById( frageSchluessel );
@@ -65,4 +67,58 @@ public class JaNeinThymeleafController {
             return "fehler";
         }
     }
+    
+    /**
+     * Seite für Verbuchung einer "Ja"-Antwort auf eine Ja/Nein-Frage.
+     * 
+     * @param frageSchluessel ID/Key der Frage
+     * 
+     * @param model Objekt für Platzhalterwerte in Thymeleaf-Template
+     * 
+     * @return "jn-antwort-verbucht" oder "fehler"
+     */
+    @GetMapping( "/jn/{frageSchluessel}/ja" )
+    public String verbucheJaAntwort( @PathVariable String frageSchluessel, 
+                                     Model model ) {
+        
+        return verbucheJaNeinAntwort( frageSchluessel, model, true );
+    }
+    
+    
+    /**
+     * Seite für Verbuchung einer "Nein"-Antwort auf eine Ja/Nein-Frage.
+     * 
+     * @param frageSchluessel ID/Key der Frage
+     * 
+     * @param model Objekt für Platzhalterwerte in Thymeleaf-Template
+     * 
+     * @return "jn-antwort-verbucht" oder "fehler"
+     */
+    @GetMapping( "/jn/{frageSchluessel}/nein" )
+    public String verbucheNeinAntwort( @PathVariable String frageSchluessel, 
+                                       Model model ) {
+        
+        return verbucheJaNeinAntwort( frageSchluessel, model, false );
+    }
+    
+    /**
+     * 
+     * @param frageSchluessel ID/Key der Frage
+     * 
+     * @param model Objekt für Platzhalterwerte in Thymeleaf-Template
+     * 
+     * @param istJa {@code true}  für "Ja"-Antwort, 
+     *              {@code false} für "Nein"-Antwort
+     * 
+     * @return "jn-antwort-verbucht" oder "fehler"
+     */
+    private String verbucheJaNeinAntwort( String frageSchluessel, 
+                                          Model model, 
+                                          boolean istJa ) {
+        
+        model.addAttribute( "fehlermeldung", "Noch nicht implementiert." );
+        
+        return "fehler";
+    }
+    
 }
