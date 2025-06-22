@@ -30,7 +30,10 @@ public class JaNeinService {
      * Antwort auf Ja/Nein-Frage mit pessimistischer Zeilensperre verbuchen.
      * <br><br>
      * 
-     * Diese Methode muss mit {@code Transactional} annotiert sein.
+     * Diese Methode muss mit {@code Transactional} annotiert sein; der 
+     * Wert des Attributs {@code timeout} steuert, nach wievielen Sekunden
+     * eine Timeout auftreten soll (v.a. wenn Sperre für Datenbankzeile
+     * nicht innerhalb dieser Zeit erhalten wird).
      * 
      * @param frageSchluessel ID/Key der Ja/Nein-Frage
      * 
@@ -44,7 +47,7 @@ public class JaNeinService {
      *                          (weil nicht rechtzeitig eine Zeilensperre
      *                           erhalten werden konnte).
      */
-    @Transactional
+    @Transactional( timeout = 5 )
     public JaNeinFrageEntity verbucheAntwort( String frageSchluessel, boolean istJa ) 
                 throws UmfrageException {
      
