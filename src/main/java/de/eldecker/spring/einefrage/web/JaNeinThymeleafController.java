@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import de.eldecker.spring.einefrage.db.janein.JaNeinFrageEntity;
 import de.eldecker.spring.einefrage.db.janein.JaNeinFrageRepo;
+import de.eldecker.spring.einefrage.logik.JaNeinLogik;
+import de.eldecker.spring.einefrage.logik.UmfrageException;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 
@@ -27,9 +29,16 @@ public class JaNeinThymeleafController {
 
     private Logger LOG = LoggerFactory.getLogger( JaNeinThymeleafController.class );
     
+    
     /** Bean für Zugriff auf DB-Tabelle mit Ja-Nein-Fragen. */
     @Autowired
     private JaNeinFrageRepo _jaNeinFrageRepo;
+    
+    /** 
+     * Bean mit Geschäftslogik für Ja/Nein-Fragen.
+     */
+    @Autowired
+    private JaNeinLogik _jaNeinLogik;
     
     
     /**
@@ -68,6 +77,7 @@ public class JaNeinThymeleafController {
         }
     }
     
+    
     /**
      * Seite für Verbuchung einer "Ja"-Antwort auf eine Ja/Nein-Frage.
      * 
@@ -81,7 +91,7 @@ public class JaNeinThymeleafController {
     public String verbucheJaAntwort( @PathVariable String frageSchluessel, 
                                      Model model ) {
         
-        return verbucheJaNeinAntwort( frageSchluessel, model, true );
+        return verbucheJaNeinAntwort( frageSchluessel, model, true ); // true=ja
     }
     
     
@@ -98,10 +108,12 @@ public class JaNeinThymeleafController {
     public String verbucheNeinAntwort( @PathVariable String frageSchluessel, 
                                        Model model ) {
         
-        return verbucheJaNeinAntwort( frageSchluessel, model, false );
+        return verbucheJaNeinAntwort( frageSchluessel, model, false ); // false=nein
     }
     
+    
     /**
+     * Verbucht eine Antwort auf eine Ja/Nein-Frage.
      * 
      * @param frageSchluessel ID/Key der Frage
      * 
@@ -115,10 +127,25 @@ public class JaNeinThymeleafController {
     private String verbucheJaNeinAntwort( String frageSchluessel, 
                                           Model model, 
                                           boolean istJa ) {
-        
-        model.addAttribute( "fehlermeldung", "Noch nicht implementiert." );
-        
-        return "fehler";
+        try {
+            
+            final JaNeinFrageEntity jaNeinFrage = 
+                    _jaNeinLogik.verbucheAntwort( frageSchluessel, istJa );
+            
+            model.addAttribute( "frage", jaNeinFrage );
+            model.addAttribute( "istJa", istJa );
+            
+            return "jn-antwort-verbucht"; 
+        } 
+        catch ( UmfrageException ex ) {
+
+            LOG.error( "Fehler beim Verbuchen der Antwort auf Ja/Nein-Frage: {}", 
+                       ex.getMessage() );
+            
+            model.addAttribute( "fehlermeldung", ex.getMessage() );
+            
+            return "fehler";
+        }
     }
     
 }

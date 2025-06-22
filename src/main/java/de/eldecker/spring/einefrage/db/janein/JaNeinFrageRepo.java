@@ -26,10 +26,17 @@ public interface JaNeinFrageRepo extends JpaRepository<JaNeinFrageEntity, String
      * 
      * @param id Key/ID der zu sperrenden Ja/Nein-Frage
      * 
-     * @return Optional mit Objekt wenn gefunden, sondern leeres Optional
+     * @return Optional mit Objekt wenn gefunden und Sperre innerhalb des Timeouts
+     *         erhalten wurde; 
+     *         wenn nicht gefunden, dann ein leeres Optional;
+     *         wenn Objekt vorhanden, aber Sperre nicht rechtzeitig erhalten,
+     *         dann wird eine {@code PessimisticLockException} geworfen.
+     * 
+     * @throws jakarta.persistence.PessimisticLockException
+     *             wenn die Zeilensperre nicht innerhalb des Timeouts erhalten werden
      */
     @Lock( PESSIMISTIC_WRITE )
-    @QueryHints({ @QueryHint( name = "javax.persistence.lock.timeout", value = "5000 ") }) 
+    @QueryHints({ @QueryHint( name = "javax.persistence.lock.timeout", value = "5000") }) 
     Optional<JaNeinFrageEntity> findWithLockingById( String id );
 
 }

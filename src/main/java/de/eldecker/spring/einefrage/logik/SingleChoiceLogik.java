@@ -110,7 +110,7 @@ public class SingleChoiceLogik {
      * 
      * @param antwortNr Nummer der Antwort, für die der Zähler um {@code +1} erhöht werden soll
      * 
-     * @return Die gespeicherte Entität bei Erfolg
+     * @return Die gespeicherte Entität bei Erfolg; wird nicht {@code null} sein
      * 
      * @throws UmfrageException bei Geschäftslogikfehlern (z.B. Frage nicht gefunden)
      * 

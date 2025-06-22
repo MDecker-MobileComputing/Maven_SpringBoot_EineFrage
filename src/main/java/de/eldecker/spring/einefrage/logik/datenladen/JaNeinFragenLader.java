@@ -36,7 +36,7 @@ public class JaNeinFragenLader implements ApplicationRunner {
         LOG.info( "Anzahl Ja/Nein-Fragen in DB: {}", anzahlVorher );
         if ( anzahlVorher > 0 ) {
             
-            LOG.info( "Datenbank enthält schon Fragen, lade deshalb keine Demo-Fragen." );
+            LOG.info( "Datenbank enthaelt schon Fragen, lade deshalb keine Demo-Fragen." );
             return;     
         }
         

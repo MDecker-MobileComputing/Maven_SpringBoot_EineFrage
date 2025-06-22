@@ -37,7 +37,7 @@ public class SingleChoiceFragenLader implements ApplicationRunner {
 		
 		if ( anzahlVorher > 0 ) {
 			
-			LOG.info( "Datenbank enthält schon SingleChoice-Fragen, lade deshalb keine Demo-Fragen." );
+			LOG.info( "Datenbank enthaelt schon SingleChoice-Fragen, lade deshalb keine Demo-Fragen." );
 			return;			
 		}
 			

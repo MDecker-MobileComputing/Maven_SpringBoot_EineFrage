@@ -15,14 +15,14 @@
     </p>
 
     <p>
-        <span class="fett">Gewählte Antwort:</span>
-        <span th:text="${antworttext}"></span>
+        <span class="fett">Ihre Antwort:</span>
+        <span th:text="${istJa} ? 'Ja' : 'Nein'"></span>
     </p>
     <br>
 
     <p>
         Sie können dieses Browser-Fenster jetzt schließen oder 
-        <a th:href="'/sc/auswertung/' + ${frage.getId()}">hier</a>
+        <a th:href="'/jn/auswertung/' + ${frage.getId()}">hier</a>
         den aktuellen Stand der Umfrage sehen.
     </p>
 
