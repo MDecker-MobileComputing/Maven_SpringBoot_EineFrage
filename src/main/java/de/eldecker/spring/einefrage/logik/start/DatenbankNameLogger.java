@@ -1,4 +1,4 @@
-package de.eldecker.spring.einefrage.logik;
+package de.eldecker.spring.einefrage.logik.start;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,9 +21,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Order( Ordered.HIGHEST_PRECEDENCE )
-public class DatabaseInfoLogger implements CommandLineRunner {
+public class DatenbankNameLogger implements CommandLineRunner {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DatabaseInfoLogger.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DatenbankNameLogger.class);
 
     
     /** Spring-Bean für Zugriff auf Umgebungsvariablen und Profile. */
@@ -35,21 +35,23 @@ public class DatabaseInfoLogger implements CommandLineRunner {
      * Diese Methode wird beim Start der Anwendung aufgerufen.
      * Sie prüft, welches Profil aktiv ist und gibt eine entsprechende
      * Meldung auf den Logger aus.
+     * 
+     * @param args Wird nicht ausgewertet
      */
     @Override
-    public void run(String... args) throws Exception {
+    public void run( String... args ) throws Exception {
 
         final String[] activeProfiles = _environment.getActiveProfiles();
 
-        final List<String> profilListe = Arrays.asList( activeProfiles );       
+        final List<String> profilListe = Arrays.asList( activeProfiles );  
+        
+        String dbName = "H2";
         if ( profilListe.contains( "postgres" ) ) {
 
-            LOG.info( "Verwende PostgreSQL-Datenbank (Profil \"postgres\" ist aktiv)." );
-
-        } else {
-
-            LOG.info( "Verwende H2-Datenbank (Default-Profil ist aktiv)." );
+            dbName = "Postgres";
         }
+        
+        LOG.info( "Verwendete Datenbank: {}", dbName );
     }
     
 }

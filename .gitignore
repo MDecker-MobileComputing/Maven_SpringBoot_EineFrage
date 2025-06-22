@@ -33,5 +33,6 @@ build/
 .vscode/
 
 
-
+# Eigene Einträge
 *.db
+*.log
