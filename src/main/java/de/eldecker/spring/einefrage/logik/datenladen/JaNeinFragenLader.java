@@ -18,10 +18,9 @@ import de.eldecker.spring.einefrage.db.janein.JaNeinFrageRepo;
 public class JaNeinFragenLader implements ApplicationRunner {
 
     private static final Logger LOG = LoggerFactory.getLogger( JaNeinFragenLader.class );
+
     
-    /**
-     * Repo-Bean für Zugriff auf Tabelle {@code JANEIN_FRAGE}.
-     */
+    /** Repo-Bean für Zugriff auf Tabelle {@code JANEIN_FRAGE}. */
     @Autowired
     private JaNeinFrageRepo _frageRepo;
     
@@ -50,6 +49,7 @@ public class JaNeinFragenLader implements ApplicationRunner {
         LOG.info( "Anzahl JaNein-Fragen in DB nach Laden von Demo-Daten: {}", anzahlNachher );     
     }
     
+    
     /**
      * Erzeugt Ja/Nein-Frage: "Ist die Erde eine Scheibe?".
      */
@@ -62,15 +62,17 @@ public class JaNeinFragenLader implements ApplicationRunner {
         _frageRepo.save( frage );
     }
 
+    
     /**
      * Erzeugt Ja/Nein-Frage: 
-     * "Soll die Vorlesung am Freitag von 14:00 auf 16:00 Uhr verschoben werden?".
+     * "Soll die Vorlesung am Freitag von 14 auf 16 Uhr verschoben werden?".
      */
     private void erzeugeJaNeinFrage2() {
         
         final JaNeinFrageEntity frage = 
                 new JaNeinFrageEntity( 
-                        "verschieb", "Soll die Vorlesung am Freitag von 14:00 auf 16:00 Uhr verschoben werden?" );
+                        "verschieb", 
+                        "Soll die Vorlesung am Freitag von 14:00 auf 16:00 Uhr verschoben werden?" );
         
         _frageRepo.save( frage );
     }

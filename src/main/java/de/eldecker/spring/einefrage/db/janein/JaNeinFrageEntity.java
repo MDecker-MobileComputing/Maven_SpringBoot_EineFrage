@@ -1,5 +1,6 @@
 package de.eldecker.spring.einefrage.db.janein;
 
+import static de.eldecker.spring.einefrage.logik.Helferlein.nachkommastellenAbschneiden;
 import static java.lang.String.format;
 
 import static java.time.LocalDateTime.now;
@@ -65,6 +66,12 @@ public class JaNeinFrageEntity {
         return zaehlerJa;
     }
 
+    public double getZaehlerJaProzent() {
+        
+        final double prozent = this.zaehlerJa * 100.0 / getGesamtzahlAntworten();
+        return nachkommastellenAbschneiden( prozent );  
+    }
+    
     public void setZaehlerJa( int zaehlerJa ) {
         
         this.zaehlerJa = zaehlerJa;
@@ -74,6 +81,12 @@ public class JaNeinFrageEntity {
         
         return zaehlerNein;
     }
+    
+    public double getZaehlerNeinProzent() {
+        
+        final double prozent = this.zaehlerNein * 100.0 / getGesamtzahlAntworten();
+        return nachkommastellenAbschneiden( prozent );  
+    }    
 
     public void setZaehlerNein( int zaehlerNein ) {
         

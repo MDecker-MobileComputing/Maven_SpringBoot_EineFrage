@@ -125,7 +125,8 @@ public class SingleChoiceLogik {
         
         if ( singleChoiceOptional.isEmpty() ) {
             
-            throw new UmfrageException( "Keine Single-Choice-Frage mit ID \"" + frageSchluessel + "\" gefunden." );
+            throw new UmfrageException( "Keine Single-Choice-Frage mit ID \"" + frageSchluessel + 
+                                        "\" gefunden." );
         }
         
         final SingleChoiceFrageEntity singleChoiceFrage = singleChoiceOptional.get();
@@ -139,9 +140,13 @@ public class SingleChoiceLogik {
         switch ( antwortNr ) {
 
             case 1 -> singleChoiceFrage.setAntwort1zaehler( singleChoiceFrage.getAntwort1zaehler() + 1 );
+            
             case 2 -> singleChoiceFrage.setAntwort2zaehler( singleChoiceFrage.getAntwort2zaehler() + 1 );
+            
             case 3 -> singleChoiceFrage.setAntwort3zaehler( singleChoiceFrage.getAntwort3zaehler() + 1 );
+            
             case 4 -> singleChoiceFrage.setAntwort4zaehler( singleChoiceFrage.getAntwort4zaehler() + 1 );
+            
             default -> throw new UmfrageException( "Illegale Antwortnummer " + antwortNr + " für ID \"" + frageSchluessel + "\"." );
         }
         

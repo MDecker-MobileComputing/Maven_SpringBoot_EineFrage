@@ -1,5 +1,7 @@
 package de.eldecker.spring.einefrage.db.singlechoice;
 
+import static de.eldecker.spring.einefrage.logik.Helferlein.nachkommastellenAbschneiden;
+
 import static java.time.LocalDateTime.now;
 
 import java.time.LocalDateTime;
@@ -285,12 +287,16 @@ public class SingleChoiceFrageEntity {
         
             case 1:
                 return antwort1text;
+                
             case 2:
                 return antwort2text;
+                
             case 3:
                 return antwort3text;
+                
             case 4:
                 return antwort4text;
+                
             default:
                 throw new IllegalArgumentException( "Ungültige Antwort-Nr: " + antwortNr );
         }
@@ -307,22 +313,7 @@ public class SingleChoiceFrageEntity {
         
         return String.format(  "Single-Choice-Frage mit ID/Key \"%s\".", id );
     }
-    
-    
-    /**
-     * Schneidet von {@code inputZahl} alle Nachkommastellen nach der ersten
-     * Nachkommastelle ab.
-     *  
-     * @param inputZahl Zahl, von der alle Nachkommastellen ab der zweiten
-     *                  abgeschnitten werden sollen
-     * 
-     * @return {@code inputZahl} mit höchstens einer Nachkommastelle
-     */
-    private double nachkommastellenAbschneiden( double inputZahl ) {
-        
-        double gerundet = (int)(inputZahl * 10) / 10.0;
-        return gerundet;
-    }
+
 
 }
 
