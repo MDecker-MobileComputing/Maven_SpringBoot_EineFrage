@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import de.eldecker.spring.einefrage.db.singlechoice.SingleChoiceFrageEntity;
 import de.eldecker.spring.einefrage.db.singlechoice.SingleChoiceFrageRepo;
-import de.eldecker.spring.einefrage.logik.SingleChoiceLogik;
+import de.eldecker.spring.einefrage.logik.SingleChoiceService;
 import de.eldecker.spring.einefrage.logik.UmfrageException;
 
 import org.slf4j.Logger;
@@ -38,7 +38,7 @@ public class SingleChoiceThymeleafController {
     
     /** Bean mit Geschäftslogik für Single-Choice-Fragen. */
     @Autowired 
-    private SingleChoiceLogik _singleChoiceLogik;
+    private SingleChoiceService _singleChoiceLogik;
     
     
     /**

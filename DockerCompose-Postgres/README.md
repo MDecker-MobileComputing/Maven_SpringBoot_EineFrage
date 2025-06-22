@@ -37,7 +37,7 @@ In *pgAdmin* muss manuell die Verbindung zur Postgres-Datenbank konfiguriert wer
 
 <br>
 
-Mit der folgenden SQL-Query in *pgAdmin* können wir uns die aktuell gesetzten
+Mit der folgenden SQL-Anweisung in *pgAdmin* können wir uns die aktuell gesetzten
 Zeilensperren für die Tabelle `janein_frage` anzeigen lassen:
 ```
 SELECT 
@@ -53,5 +53,18 @@ WHERE relation = 'janein_frage'::regclass;
 <br>
 
 ![Screenshot: Ergebnis von Query zur Anzeige von Sperren in Tabelle](pgAdmin_SperrenFuerTabelleAnzeigen.png)
+
+<br>
+
+**Programm bei gesetzter Zeilensperre im Debugger anhalten:**
+
+* Breakpoint an geeigneter Stelle in Methode `verbucheAntwort()` der Klasse `JaNeinLogik` 
+  setzen, nämlich an einer Anweisung nach `_jaNeinFrageRepo.findWithLockingById()` und
+  vor `_jaNeinFrageRepo.save( jaNeinFrage );`
+
+* Programm im Debug-Modus gegen Postgres-DB starten.
+
+* Eine Antwort für eine Ja/Nein-Frage im Browser erzeugen, z.B. durch Öffnen der
+  folgenden URL im Browser: http://localhost:8080/jn/verschieb/nein
 
 <br>

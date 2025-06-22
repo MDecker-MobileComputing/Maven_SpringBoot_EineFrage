@@ -19,9 +19,9 @@ import de.eldecker.spring.einefrage.db.singlechoice.SingleChoiceFrageRepo;
  * Bean-Klasse mit Geschäftslogik für Single-Choice-Fragen.
  */
 @Service
-public class SingleChoiceLogik {
+public class SingleChoiceService {
     
-    private Logger LOG = LoggerFactory.getLogger( SingleChoiceLogik.class );
+    private Logger LOG = LoggerFactory.getLogger( SingleChoiceService.class );
     
     
     /** Max. Anzahl der Versuche für Speichern eines geänderten Datensatzes. */

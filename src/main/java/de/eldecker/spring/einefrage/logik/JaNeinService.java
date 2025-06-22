@@ -16,9 +16,9 @@ import de.eldecker.spring.einefrage.db.janein.JaNeinFrageRepo;
  * Bean-Klasse mit Geschäftslogik für Ja/nein-Fragen.
  */
 @Service
-public class JaNeinLogik {
+public class JaNeinService {
 
-    private Logger LOG = LoggerFactory.getLogger( JaNeinLogik.class );
+    private Logger LOG = LoggerFactory.getLogger( JaNeinService.class );
     
     
     /** Repo-Bean für Zugriff auf DB-Tabelle mit Ja/Nein-Fragen. */

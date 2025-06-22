@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import de.eldecker.spring.einefrage.db.janein.JaNeinFrageEntity;
 import de.eldecker.spring.einefrage.db.janein.JaNeinFrageRepo;
 import de.eldecker.spring.einefrage.db.singlechoice.SingleChoiceFrageEntity;
-import de.eldecker.spring.einefrage.logik.JaNeinLogik;
+import de.eldecker.spring.einefrage.logik.JaNeinService;
 import de.eldecker.spring.einefrage.logik.UmfrageException;
 
 
@@ -37,7 +37,7 @@ public class JaNeinThymeleafController {
      * Bean mit Geschäftslogik für Ja/Nein-Fragen.
      */
     @Autowired
-    private JaNeinLogik _jaNeinLogik;
+    private JaNeinService _jaNeinLogik;
     
     
     /**
