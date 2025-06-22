@@ -36,6 +36,16 @@ public class SingleChoiceLogik {
     /**
      * Einzelne Antwort für eine Single-Choice-Frage verbuchen.
      * Implementiert einen Retry-Mechanismus für den Fall von konkurrierenden Zugriffen.
+     * <br><br>
+     * 
+     * Retry müsste auch mit Annotation {@code @Retryable} möglich sein:
+     * <pre>
+     * @Retryable(
+     *   value = ObjectOptimisticLockingFailureException.class,
+     *   maxAttempts = 3,
+     *   backoff = @Backoff(delay = 200)
+     *)
+     * </pre>
      * 
      * @param frageSchluessel ID/Key der Single-Choice-Frage, für die eine Antwort verbucht werden soll
      * 
