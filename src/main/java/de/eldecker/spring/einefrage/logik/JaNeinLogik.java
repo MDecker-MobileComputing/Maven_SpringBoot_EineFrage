@@ -20,8 +20,11 @@ public class JaNeinLogik {
 
     private Logger LOG = LoggerFactory.getLogger( JaNeinLogik.class );
     
+    
+    /** Repo-Bean für Zugriff auf DB-Tabelle mit Ja/Nein-Fragen. */
     @Autowired
     private JaNeinFrageRepo _jaNeinFrageRepo;
+    
     
     /**
      * Antwort auf Ja/Nein-Frage mit pessimistischer Zeilensperre verbuchen.
@@ -45,7 +48,7 @@ public class JaNeinLogik {
         try {
             
             final Optional<JaNeinFrageEntity> jaNeinFrageOptional = 
-                    _jaNeinFrageRepo.findWithLockingById( frageSchluessel );
+                    _jaNeinFrageRepo.findWithLockingById( frageSchluessel ); // Sperre anfordern
             
             if ( jaNeinFrageOptional.isEmpty() ) {
                 
@@ -64,7 +67,7 @@ public class JaNeinLogik {
                 jaNeinFrage.inkrementNein();
             }
         
-            final JaNeinFrageEntity ergebnisEntity = _jaNeinFrageRepo.save( jaNeinFrage );
+            final JaNeinFrageEntity ergebnisEntity = _jaNeinFrageRepo.save( jaNeinFrage ); // Sperre freigeben
             
             LOG.info( "Antwort auf Ja/Nein-Frage \"{}\" verbucht: {}", 
                       frageSchluessel, istJa ? "Ja" : "Nein" );
