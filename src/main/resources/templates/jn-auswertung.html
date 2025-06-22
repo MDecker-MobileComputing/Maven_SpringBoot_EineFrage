@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <title th:text="'Auswertung für Single-Choice-Frage' + ${frage.getFragetext()}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/umfrage-stil.css"/>
+</head>
+<body>
+
+    <h1 th:text="'Auswertung für Ja/Nein-Frage: ' + ${frage.getFragetext()}"></h1>
+
+    <p>
+        <span class="fett">Ja-Antworten:</span>
+        <span th:text="${frage.getZaehlerJa()}"></span>
+    </p>
+
+    <p>
+        <span class="fett">Nein-Antworten:</span>
+        <span th:text="${frage.getZaehlerNein()}"></span>
+    </p>
+    <br><br>
+
+    <p>
+        <span class="fett">Gesamtanzahl der Antworten:</span>
+        <span th:text="${frage.getGesamtzahlAntworten()}"></span>
+    </p>
+    
+</body>
+</html>

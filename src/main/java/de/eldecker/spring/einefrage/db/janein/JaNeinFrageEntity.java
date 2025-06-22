@@ -11,6 +11,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 
+/**
+ * Tabelle für Ja/Nein-Fragen.
+ */
 @Entity
 @Table( name = "JANEIN_FRAGE" )
 public class JaNeinFrageEntity {
@@ -102,7 +105,7 @@ public class JaNeinFrageEntity {
      * 
      * @return AnzahlJa + AnzahlNein
      */
-    public int getGesamtZaehler() {
+    public int getGesamtzahlAntworten() {
 
         return zaehlerJa + zaehlerNein;
     }

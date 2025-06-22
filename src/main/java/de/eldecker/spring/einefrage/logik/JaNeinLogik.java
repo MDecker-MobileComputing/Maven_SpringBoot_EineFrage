@@ -28,6 +28,9 @@ public class JaNeinLogik {
     
     /**
      * Antwort auf Ja/Nein-Frage mit pessimistischer Zeilensperre verbuchen.
+     * <br><br>
+     * 
+     * Diese Methode muss mit {@code Transactional} annotiert sein.
      * 
      * @param frageSchluessel ID/Key der Ja/Nein-Frage
      * 

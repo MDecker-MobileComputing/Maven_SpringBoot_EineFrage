@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import de.eldecker.spring.einefrage.db.janein.JaNeinFrageEntity;
 import de.eldecker.spring.einefrage.db.janein.JaNeinFrageRepo;
+import de.eldecker.spring.einefrage.db.singlechoice.SingleChoiceFrageEntity;
 import de.eldecker.spring.einefrage.logik.JaNeinLogik;
 import de.eldecker.spring.einefrage.logik.UmfrageException;
 
@@ -65,7 +66,7 @@ public class JaNeinThymeleafController {
         } else {
             
             final String fehlermeldung = 
-                    format( "Keine Ja/nein-Frage mit ID \"%s\" gefunden.",
+                    format( "Keine Ja/Nein-Frage mit ID \"%s\" gefunden.",
                             frageSchluessel );
             
             LOG.warn( fehlermeldung );
@@ -146,4 +147,42 @@ public class JaNeinThymeleafController {
         }
     }
     
+    
+    /**
+     * Anzeige der Auswertung zu einer Ja/Nein-Frage.
+     * 
+     * @param frageSchluessel ID/Key der Frage
+     * 
+     * @param model Objekt für Platzhalterwertete in Thymeleaf-Template
+     * 
+     * @return Template-Datei "jn-auswertung" oder "fehler" 
+     */    
+    @GetMapping( "/jn/auswertung/{frageSchluessel}" )    
+    public String auswertungJaNeinFrage( @PathVariable String frageSchluessel, 
+                                         Model model ) {
+                        
+        final Optional<JaNeinFrageEntity> jaNeinFrageOptional = 
+                            _jaNeinFrageRepo.findById( frageSchluessel );
+        
+        if ( jaNeinFrageOptional.isPresent() ) {
+        
+            final JaNeinFrageEntity jaNeinFrage = jaNeinFrageOptional.get();
+        
+            model.addAttribute( "frage", jaNeinFrage );
+        
+            return "jn-auswertung";
+        
+        } else {
+        
+            final String fehlermeldung = 
+                    format( "Keine Ja/Nein-Frage mit ID \"%s\" gefunden.",
+                            frageSchluessel );
+        
+            LOG.warn( fehlermeldung );
+            model.addAttribute( "fehlermeldung", fehlermeldung );
+        
+            return "fehler";
+        }            
+    }    
+
 }

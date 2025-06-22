@@ -11,26 +11,26 @@
 
     <p class="fett">Stimmen für ...</p>
     <ul>
-    <li>
-        <span class="fett" th:text="'Antwort 1 (' + ${frage.getAntwort1text()} + '):'"></span> 
-        <span th:text="${frage.getAntwort1zaehler()}"></span>
-        <span th:text=" '(' + ${frage.getAntwort1zaehlerProzent()} + ' %' + ')'"></span>        
-    </li>
-    <li>
-        <span class="fett" th:text="'Antwort 2 (' + ${frage.getAntwort2text()} + '):'"></span> 
-        <span th:text="${frage.getAntwort2zaehler()}"></span>
-        <span th:text=" '(' + ${frage.getAntwort2zaehlerProzent()} + ' %' + ')'"></span>        
-    </li>
-    <li th:if="${frage.getAntwort3text().length() > 0}">
-        <span class="fett" th:text="'Antwort 3 (' + ${frage.getAntwort3text()} + '):'"></span> 
-        <span th:text="${frage.getAntwort3zaehler()}"></span>
-        <span th:text=" '(' + ${frage.getAntwort3zaehlerProzent()} + ' %' + ')'"></span>        
-    </li>
-    <li th:if="${frage.getAntwort4text().length() > 0}">
-        <span class="fett" th:text="'Antwort 4 (' + ${frage.getAntwort4text()} + '):'"></span> 
-        <span th:text="${frage.getAntwort4zaehler()}"></span>
-        <span th:text=" '(' + ${frage.getAntwort4zaehlerProzent()} + ' %' + ')'"></span>        
-    </li>
+        <li>
+            <span class="fett" th:text="'Antwort 1 (' + ${frage.getAntwort1text()} + '):'"></span> 
+            <span th:text="${frage.getAntwort1zaehler()}"></span>
+            <span th:text=" '(' + ${frage.getAntwort1zaehlerProzent()} + ' %' + ')'"></span>        
+        </li>
+        <li>
+            <span class="fett" th:text="'Antwort 2 (' + ${frage.getAntwort2text()} + '):'"></span> 
+            <span th:text="${frage.getAntwort2zaehler()}"></span>
+            <span th:text=" '(' + ${frage.getAntwort2zaehlerProzent()} + ' %' + ')'"></span>        
+        </li>
+        <li th:if="${frage.getAntwort3text().length() > 0}">
+            <span class="fett" th:text="'Antwort 3 (' + ${frage.getAntwort3text()} + '):'"></span> 
+            <span th:text="${frage.getAntwort3zaehler()}"></span>
+            <span th:text=" '(' + ${frage.getAntwort3zaehlerProzent()} + ' %' + ')'"></span>        
+        </li>
+        <li th:if="${frage.getAntwort4text().length() > 0}">
+            <span class="fett" th:text="'Antwort 4 (' + ${frage.getAntwort4text()} + '):'"></span> 
+            <span th:text="${frage.getAntwort4zaehler()}"></span>
+            <span th:text=" '(' + ${frage.getAntwort4zaehlerProzent()} + ' %' + ')'"></span>        
+        </li>
     </ul>
     <br><br>
 
