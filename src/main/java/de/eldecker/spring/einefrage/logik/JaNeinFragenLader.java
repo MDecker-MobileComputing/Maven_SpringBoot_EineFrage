@@ -56,7 +56,9 @@ public class JaNeinFragenLader implements ApplicationRunner {
     private void erzeugeJaNeinFrage1() {
         
         final JaNeinFrageEntity frage = 
-                new JaNeinFrageEntity( "scheibe", "Ist die Erde eine Scheibe?" );
+                new JaNeinFrageEntity( 
+                        "scheibe", "Ist die Erde eine Scheibe?" );
+        
         _frageRepo.save( frage );
     }
 
@@ -67,7 +69,9 @@ public class JaNeinFragenLader implements ApplicationRunner {
     private void erzeugeJaNeinFrage2() {
         
         final JaNeinFrageEntity frage = 
-                new JaNeinFrageEntity( "verschieb", "Soll die Vorlesung am Freitag von 14:00 auf 16:00 Uhr verschoben werden?" );
+                new JaNeinFrageEntity( 
+                        "verschieb", "Soll die Vorlesung am Freitag von 14:00 auf 16:00 Uhr verschoben werden?" );
+        
         _frageRepo.save( frage );
     }
     

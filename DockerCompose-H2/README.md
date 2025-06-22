@@ -21,6 +21,7 @@ Es wird folgendes Image verwendet:
 <br>
 
 Die integrierte H2-Konsole ist lokal über folgende URL erreichbar: http://localhost:9090/
+
 Für eine Verbindung ist im Feld "JDBC URL" die folgende URL einzutragen: 
 ```
 jdbc:h2:tcp://localhost:1521/umfrage

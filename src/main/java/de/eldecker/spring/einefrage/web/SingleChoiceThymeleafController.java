@@ -23,7 +23,8 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * Controller zur Erzeugung von Web-Seiten mit Template-Engine "Thymeleaf".
+ * Controller zur Erzeugung von Web-Seiten mit Template-Engine "Thymeleaf"
+ * für Single-Choice-Fragen.
  */
 @Controller
 public class SingleChoiceThymeleafController {
