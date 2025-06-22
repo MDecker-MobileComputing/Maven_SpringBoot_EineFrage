@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import de.eldecker.spring.einefrage.db.janein.JaNeinFrageEntity;
 import de.eldecker.spring.einefrage.db.janein.JaNeinFrageRepo;
-import de.eldecker.spring.einefrage.db.singlechoice.SingleChoiceFrageEntity;
 import de.eldecker.spring.einefrage.logik.JaNeinService;
 import de.eldecker.spring.einefrage.logik.UmfrageException;
 

@@ -35,18 +35,18 @@ public class JaNeinFragenLader implements ApplicationRunner {
         LOG.info( "Anzahl Ja/Nein-Fragen in DB: {}", anzahlVorher );
         if ( anzahlVorher > 0 ) {
             
-            LOG.info( "Datenbank enthaelt schon Fragen, lade deshalb keine Demo-Fragen." );
+            LOG.info( "Datenbank enthaelt schon Ja/Nein-Fragen, lade deshalb keine Demo-Fragen." );
             return;     
         }
         
 
-        LOG.info( "Datenbank ist leer, lade JaNein-Fragen." );
+        LOG.info( "Datenbank ist leer, lade Ja/Nein-Fragen." );
         
         erzeugeJaNeinFrage1();
         erzeugeJaNeinFrage2();
         
         final long anzahlNachher = _frageRepo.count();
-        LOG.info( "Anzahl JaNein-Fragen in DB nach Laden von Demo-Daten: {}", anzahlNachher );     
+        LOG.info( "Anzahl Ja/Nein-Fragen in DB nach Laden von Demo-Daten: {}", anzahlNachher );     
     }
     
     
