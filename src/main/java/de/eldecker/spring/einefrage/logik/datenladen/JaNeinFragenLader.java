@@ -72,7 +72,7 @@ public class JaNeinFragenLader implements ApplicationRunner {
         final JaNeinFrageEntity frage = 
                 new JaNeinFrageEntity( 
                         "verschieb", 
-                        "Soll die Vorlesung am Freitag von 14:00 auf 16:00 Uhr verschoben werden?" );
+                        "Soll die Vorlesung am Freitag von 14 auf 16 Uhr verschoben werden?" );
         
         _frageRepo.save( frage );
     }
