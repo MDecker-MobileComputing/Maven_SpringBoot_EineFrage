@@ -65,6 +65,18 @@ public class SingleChoiceLogik {
                 
                 LOG.warn( "Versuch {} von {} von Verbuchung von Antwort {} für Frage \"{}\" fehlgeschlagen.",
                           i, MAX_ANZAHL_VERSUCHE, antwortNr, frageSchluessel );
+                
+                if (i != MAX_ANZAHL_VERSUCHE) {
+
+                    // Kurze Pause, bevor der nächste Versuch gestartet wird
+                    try {
+                        Thread.sleep( 200 ); // 0,2 Sekunde
+                    }
+                    catch ( InterruptedException ex2 ) {
+                        
+                        LOG.error( "Thread wurde während der Wartezeit unterbrochen.", ex2 );
+                    }
+                }
             }
             
         } // for
@@ -79,8 +91,8 @@ public class SingleChoiceLogik {
 
 
     /**
-     * Führt einen einzelnen Versuch durch, eine Antwort zu verbuchen. Diese Methode wird
-     * in einer eigenen Transaktion ausgeführt. Wenn ein {@code ObjectOptimisticLockingFailureException}
+     * Führt einen einzelnen Versuch durch, eine Antwort zu verbuchen. Diese Methode wird in 
+     * einer eigenen Transaktion ausgeführt. Wenn ein {@code ObjectOptimisticLockingFailureException}
      * auftritt, wird die Transaktion zurückgerollt und die aufrufende Methode kann einen neuen
      * Versuch durchführen.
      *
@@ -92,7 +104,8 @@ public class SingleChoiceLogik {
      * 
      * @throws UmfrageException bei Geschäftslogikfehlern (z.B. Frage nicht gefunden)
      * 
-     * @throws ObjectOptimisticLockingFailureException wenn die Entität mittlerweile von einem anderen Prozess geändert wurde
+     * @throws ObjectOptimisticLockingFailureException wenn die Entität mittlerweile von 
+     *                                                 einem anderen Prozess geändert wurde
      */
     private SingleChoiceFrageEntity versucheAntwortZuVerbuchen( String frageSchluessel, int antwortNr ) 
             throws UmfrageException, ObjectOptimisticLockingFailureException  {
