@@ -89,6 +89,9 @@ public class JaNeinThymeleafController {
     public String verbucheJaAntwort( @PathVariable String frageSchluessel, 
                                      Model model ) {
         
+        LOG.info( "Soll Antwort \"Ja\" für Ja/Nein-Frage \"{}\" verbuchen.", 
+                  frageSchluessel );        
+        
         return verbucheJaNeinAntwort( frageSchluessel, model, true ); // true=ja
     }
     
@@ -105,6 +108,9 @@ public class JaNeinThymeleafController {
     @GetMapping( "/jn/{frageSchluessel}/nein" )
     public String verbucheNeinAntwort( @PathVariable String frageSchluessel, 
                                        Model model ) {
+        
+        LOG.info( "Soll Antwort \"Nein\" für Ja/Nein-Frage \"{}\" verbuchen.", 
+                frageSchluessel );
         
         return verbucheJaNeinAntwort( frageSchluessel, model, false ); // false=nein
     }
