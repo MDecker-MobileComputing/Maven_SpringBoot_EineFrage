@@ -11,9 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import de.eldecker.spring.einefrage.db.janein.JaNeinFrageEntity;
 import de.eldecker.spring.einefrage.db.janein.JaNeinFrageRepo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 
 /**
  * Bean-Klasse mit Geschäftslogik für Ja/nein-Fragen.

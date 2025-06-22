@@ -16,8 +16,6 @@ import de.eldecker.spring.einefrage.db.janein.JaNeinFrageEntity;
 import de.eldecker.spring.einefrage.db.janein.JaNeinFrageRepo;
 import de.eldecker.spring.einefrage.logik.JaNeinLogik;
 import de.eldecker.spring.einefrage.logik.UmfrageException;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 
 
 /**
