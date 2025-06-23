@@ -46,9 +46,14 @@ public class SingleChoiceService {
      *   backoff = @Backoff( delay = 200 )
      *)
      * </pre>
-     * Benötigt folgende Dependencies: 
+     * Benötigt folgende Dependencies in der Datei {@code pom.xml}
      * {@code org.springframework.retry:spring-retry} und 
      * {@code org.springframework.boot:spring-boot-starter-aop}
+     * Außerdem muss Einstiegsklasse der Anwendung oder eine Konfig-Klasse
+     * mit {@code EnableRetry} annotiert sein.     
+     * <br>
+     * siehe auch folgenden Gist mit kompletter vorliegender Klasse auf Retry umgestellt.
+     * https://gist.github.com/MDecker-MobileComputing/1fea174041acfa9b8a915dfc6eee937c
      * 
      * @param frageSchluessel ID/Key der Single-Choice-Frage, für die eine Antwort verbucht werden soll
      * 
