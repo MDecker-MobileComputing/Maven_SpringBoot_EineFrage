@@ -41,11 +41,14 @@ public class SingleChoiceService {
      * Retry müsste auch mit Annotation {@code @Retryable} möglich sein:
      * <pre>
      * @Retryable(
-     *   value = ObjectOptimisticLockingFailureException.class,
+     *   retryFor = ObjectOptimisticLockingFailureException.class,
      *   maxAttempts = 3,
-     *   backoff = @Backoff(delay = 200)
+     *   backoff = @Backoff( delay = 200 )
      *)
      * </pre>
+     * Benötigt folgende Dependencies: 
+     * {@code org.springframework.retry:spring-retry} und 
+     * {@code org.springframework.boot:spring-boot-starter-aop}
      * 
      * @param frageSchluessel ID/Key der Single-Choice-Frage, für die eine Antwort verbucht werden soll
      * 
