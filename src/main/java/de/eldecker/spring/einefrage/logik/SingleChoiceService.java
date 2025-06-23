@@ -58,8 +58,7 @@ public class SingleChoiceService {
      * 
      * @throws UmfrageException Frage nicht gefunden, unzulässige Antwortnummer oder nach mehreren
      *                          Versuchen immer noch konkurrierender Zugriff.
-     */
-    
+     */    
     public SingleChoiceFrageEntity verbucheAntwort( String frageSchluessel, 
                                                     int antwortNr ) throws UmfrageException {
     
@@ -141,6 +140,7 @@ public class SingleChoiceService {
                                         singleChoiceFrage.getMaxAntwortNr() + " für ID \"" + frageSchluessel + "\"." );
         }
         
+        // Zähler erhöhen
         switch ( antwortNr ) {
 
             case 1 -> singleChoiceFrage.setAntwort1zaehler( singleChoiceFrage.getAntwort1zaehler() + 1 );
@@ -151,7 +151,8 @@ public class SingleChoiceService {
             
             case 4 -> singleChoiceFrage.setAntwort4zaehler( singleChoiceFrage.getAntwort4zaehler() + 1 );
             
-            default -> throw new UmfrageException( "Illegale Antwortnummer " + antwortNr + " für ID \"" + frageSchluessel + "\"." );
+            default -> throw new UmfrageException( "Illegale Antwortnummer " + antwortNr + " für ID \"" + 
+                                                   frageSchluessel + "\"." );
         }
         
         singleChoiceFrage.setZeitpunktLetzteAntwort( now() );
