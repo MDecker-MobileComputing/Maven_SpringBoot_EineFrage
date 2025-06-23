@@ -77,7 +77,7 @@ public class SingleChoiceService {
                 LOG.warn( "Versuch {} von {} von Verbuchung von Antwort {} für Frage \"{}\" fehlgeschlagen.",
                           i, MAX_ANZAHL_VERSUCHE, antwortNr, frageSchluessel );
                 
-                if (i != MAX_ANZAHL_VERSUCHE) {
+                if ( i != MAX_ANZAHL_VERSUCHE ) {
 
                     // Kurze Pause, bevor der nächste Versuch gestartet wird
                     try {
