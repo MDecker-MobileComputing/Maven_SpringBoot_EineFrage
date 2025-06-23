@@ -56,6 +56,7 @@ public class SingleChoiceService {
      * @throws UmfrageException Frage nicht gefunden, unzulässige Antwortnummer oder nach mehreren
      *                          Versuchen immer noch konkurrierender Zugriff.
      */
+    
     public SingleChoiceFrageEntity verbucheAntwort( String frageSchluessel, 
                                                     int antwortNr ) throws UmfrageException {
     
@@ -80,7 +81,7 @@ public class SingleChoiceService {
 
                     // Kurze Pause, bevor der nächste Versuch gestartet wird
                     try {
-                        Thread.sleep( 200 ); // 0,2 Sekunde
+                        Thread.sleep( 200 ); // 200ms = 0,2 Sekunden
                     }
                     catch ( InterruptedException ex2 ) {
                         
